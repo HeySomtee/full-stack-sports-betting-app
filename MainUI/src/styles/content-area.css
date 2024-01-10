@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
 .main-content {
     /* background-color: #ffffff2f; */
     color: #808080;
@@ -72,6 +72,10 @@
     border-radius: 3px;
 }
 
+i {
+    font-family: 'Lemon', serif;
+}
+
 .match-teams{
     height: 120px;
 }
@@ -95,7 +99,7 @@
     background-color: #52505048;
 }
 .range-inner {
-    width: 74.44%;
+    width: 50%;
     height: 3px;
     background-color: #d61a1a;
     border-right: solid 5px #01080f;
@@ -124,4 +128,19 @@
     min-height: 60vh;
     width: 100%;
     background-color: #ffffff2f;
+}
+
+.carousel-btn{
+    width: 10px;
+    padding: 5px 20px;
+    margin-left: 10px;
+    /* border-radius: 5px; */
+}
+
+.active {
+    background-color: #144fce;
+}
+
+.inactive {
+    background-color: #52505048;
 }

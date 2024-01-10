@@ -11,15 +11,66 @@ function ContentArea() {
           <p>100% Welcome Bonus</p>
         </div>
         <div className='hero-image-div'><img className='hero-image' src={heroImage} alt="" /></div>
-      </div> */}
-      
+      </div> 
       <br />
+      */}
+
       <section className='match-display'>
         <div>
           <span><b className='text-white text-lg'>Live</b> Matches</span>
         </div>
         <br />
         <div className='live-match-container flex'>
+          
+        <div className="live-match-display p-2">
+            <div className='match-status flex justify-between'>
+              <span className='live'>Live</span> 
+              <span>'45</span>
+            </div>
+            <div className='match-teams flex justify-between'>
+              <div><img src="https://crests.football-data.org/65.png" alt="" /></div>
+              <div className='text-white'><i className='i'>VS</i></div>
+              <div><img src="https://crests.football-data.org/356.png" alt="" /></div>
+            </div>
+
+            <div className='match-range'>
+              <small className='text-white'>2nd Half 67'</small>
+              <div className='range-outer'><div className='range-inner'></div></div>
+            </div>
+            
+            <div className='py-2'>
+              <small className='dir'>Football / Englang Premier League</small>
+            </div>
+            {/* <br /> */}
+            <div className='team-scores-text text-white'>
+              <div className='home-team-text flex justify-between'>
+                <span>Man City</span> 
+                <span>2</span>
+              </div>
+              <div className='away-team-text flex justify-between'>
+                <span>Everton</span>
+                <span>0</span>
+              </div>
+            </div>
+
+            <br />
+            <div className='odds-container flex justify-between'>
+              <div className=''>
+                <small>1</small>
+                <small>1.76</small>
+              </div>
+              <div className=''>
+                <small>x</small>
+                <small>1.49</small>
+              </div>
+              <div className=''>
+                <small>2</small>
+                <small>2.01</small>
+              </div>
+            </div>
+
+          </div>
+
           <div className="live-match-display p-2">
             <div className='match-status flex justify-between'>
               <span className='live'>Live</span> 
@@ -27,7 +78,7 @@ function ContentArea() {
             </div>
             <div className='match-teams flex justify-between'>
               <div><img src="https://crests.football-data.org/57.png" alt="" /></div>
-              <div className='text-white'><i>VS</i></div>
+              <div className='text-white'><i className='i'>VS</i></div>
               <div><img src="https://crests.football-data.org/563.png" alt="" /></div>
             </div>
 
@@ -75,9 +126,9 @@ function ContentArea() {
               <span>'45</span>
             </div>
             <div className='match-teams flex justify-between'>
-              <div><img src="https://crests.football-data.org/57.png" alt="" /></div>
-              <div className='text-white'><i>VS</i></div>
-              <div><img src="https://crests.football-data.org/563.png" alt="" /></div>
+              <div><img src="https://crests.football-data.org/351.png" alt="" /></div>
+              <div className='text-white'><i className='i'>VS</i></div>
+              <div><img src=" https://crests.football-data.org/66.png" alt="" /></div>
             </div>
 
             <div className='match-range'>
@@ -91,11 +142,11 @@ function ContentArea() {
             {/* <br /> */}
             <div className='team-scores-text text-white'>
               <div className='home-team-text flex justify-between'>
-                <span>Arsenal</span> 
+                <span>Nottingham</span> 
                 <span>1</span>
               </div>
               <div className='away-team-text flex justify-between'>
-                <span>West Ham</span>
+                <span>Man United</span>
                 <span>2</span>
               </div>
             </div>
@@ -124,9 +175,9 @@ function ContentArea() {
               <span>'45</span>
             </div>
             <div className='match-teams flex justify-between'>
-              <div><img src="https://crests.football-data.org/57.png" alt="" /></div>
-              <div className='text-white'><i>VS</i></div>
-              <div><img src="https://crests.football-data.org/563.png" alt="" /></div>
+              <div><img src="https://crests.football-data.org/354.png" alt="" /></div>
+              <div className='text-white'><i className='i'>VS</i></div>
+              <div><img src="https://crests.football-data.org/402.png" alt="" /></div>
             </div>
 
             <div className='match-range'>
@@ -140,12 +191,12 @@ function ContentArea() {
             {/* <br /> */}
             <div className='team-scores-text text-white'>
               <div className='home-team-text flex justify-between'>
-                <span>Arsenal</span> 
-                <span>1</span>
+                <span>Crystal Palace</span> 
+                <span>3</span>
               </div>
               <div className='away-team-text flex justify-between'>
-                <span>West Ham</span>
-                <span>2</span>
+                <span>Brentford</span>
+                <span>1</span>
               </div>
             </div>
 
@@ -173,9 +224,9 @@ function ContentArea() {
               <span>'45</span>
             </div>
             <div className='match-teams flex justify-between'>
-              <div><img src="https://crests.football-data.org/57.png" alt="" /></div>
-              <div className='text-white'><i>VS</i></div>
-              <div><img src="https://crests.football-data.org/563.png" alt="" /></div>
+              <div><img src="https://crests.football-data.org/65.png" alt="" /></div>
+              <div className='text-white'><i className='i'>VS</i></div>
+              <div><img src="https://crests.football-data.org/356.png" alt="" /></div>
             </div>
 
             <div className='match-range'>
@@ -189,12 +240,12 @@ function ContentArea() {
             {/* <br /> */}
             <div className='team-scores-text text-white'>
               <div className='home-team-text flex justify-between'>
-                <span>Arsenal</span> 
-                <span>1</span>
+                <span>Man City</span> 
+                <span>2</span>
               </div>
               <div className='away-team-text flex justify-between'>
-                <span>West Ham</span>
-                <span>2</span>
+                <span>Everton</span>
+                <span>0</span>
               </div>
             </div>
 
@@ -217,8 +268,11 @@ function ContentArea() {
           </div>
           
         </div>
-        <div className='p-3'>
-          [ carosel buttons ]
+        <div className='live-match-carousel p-3 flex'>
+          <div className='carousel-btn active'></div>
+          <div className='carousel-btn inactive'></div>
+          <div className='carousel-btn inactive'></div>
+          <div className='carousel-btn inactive'></div>
         </div>
       </section>
 
