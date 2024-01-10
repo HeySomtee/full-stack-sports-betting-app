@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Roboto&display=swap');
+.nav-bar {
+    width: 100vw;
+    font-family: 'Courgette', cursive;
+    font-family: 'Roboto', sans-serif;
+    color: #808080;
+}
+
+
+.sub-1 {
+    width: 37vw;
+    justify-content: space-around;
+}
+
+.call-to-action {
+    width: 23vw;
+}
+
+.btn {
+    padding: 0px 25px;
+    border-radius: 5px;
+}
+
+.aux {
+    background-color: #80808060;
+    color: #fff;
+}

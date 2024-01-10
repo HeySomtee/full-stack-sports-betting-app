@@ -1,0 +1,52 @@
+
+body{
+    box-sizing: border-box;
+}
+
+.flex{
+    display: flex;
+}
+
+.widget {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 10px;
+    background-color: blueviolet;
+    width: 100vw;
+    height: auto;
+}
+
+.match-div{
+    display: flex;
+    /* width: 15vw; */
+    justify-content: space-around;
+    padding: 10px 10px;
+    margin-left: 30px;
+    background-color: white;
+    border: transparent solid 2px;
+}
+
+.match-div:hover{
+    border: orange solid 2px;
+}
+
+.match-div img{
+    width: 40px;
+}
+
+.team{
+    display: grid;
+    place-content: center;
+}
+
+.scores{
+    width: 50px;
+    justify-content: space-between;
+}
+
+.grid-center{
+    display: grid;
+    place-content: center;
+}
+
+
