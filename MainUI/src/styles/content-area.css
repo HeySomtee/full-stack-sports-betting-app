@@ -124,23 +124,90 @@ i {
     width: 30%;
 }
 
-.height-dummy {
-    min-height: 60vh;
+.upcoming-match-display {
     width: 100%;
-    background-color: #ffffff2f;
+    
 }
 
-.carousel-btn{
-    width: 10px;
-    padding: 5px 20px;
-    margin-left: 10px;
-    /* border-radius: 5px; */
+.upc-header {
+    width: 100%;
+    background-color: #52505069;
+    font-size: small;
+    border-radius: 6px;
 }
 
-.active {
-    background-color: #144fce;
+.upc-header > div {
+    display: flex;
 }
 
-.inactive {
-    background-color: #52505048;
+.upc-match-info {
+    width: 15%;
+    height: 100%;
+    justify-content: space-between;
 }
+
+.upc-odds-header {
+    width: 60%;
+    place-content: center;
+    justify-content: center;
+}
+
+.inner-upc-odds-header {
+    width: 50%;
+    place-content: center;
+    justify-content: space-around;
+
+}
+
+.markets {
+    width: 7%;
+    place-content: center;
+    justify-content: center;
+
+}
+
+.upc-fixtures-display {
+    width: 100%;
+    background-color: #52505038;
+    margin-top: 5px;
+    font-size: 0.8em;
+}
+
+.match-status-display {
+    height: 40px;
+    width: 50px;
+    background-color: #52505069;
+}
+
+.upc-odds-display{
+    display: flex;
+    justify-content: space-between;
+}
+
+.upc-odds-display > div{
+    background-color: #52505069;
+    display: grid;
+    place-content: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.v-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.upc-home-team > img, .upc-away-team  img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #52505038;
+}
+
+.upc-home-team, .upc-away-team {
+    align-items: center;
+    justify-content: space-between;
+    width: 20%;
+    
+}
+

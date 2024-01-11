@@ -4,6 +4,7 @@ import Nav from './Components/Nav'
 import LeftSideBar from './Components/LeftSideBar'
 import ContentArea from './Components/ContentArea'
 import RightSideBar from './Components/RightSideBar'
+import Test from './Components/Test';
 
 
 function App() {
