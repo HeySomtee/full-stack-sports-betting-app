@@ -29,21 +29,21 @@ function ContentArea() {
   const processData  = (newData) => {
     var Matches = newData.matches
     setData(Matches)
-    console.log(Matches.length);
+    console.log(Matches);
   } 
 
   return (
     <div className='main-content'>
 
-      {/* <div className='poster bg-primary-800 flex justify-around'>
+      <div className='poster bg-primary-800 flex justify-left'>
         <div className='poster-text'>
-          <h2>SIGN UP AND GET </h2>
-          <p>100% Welcome Bonus</p>
+          <h2><b>SIGN UP AND GET </b></h2>
+          <p><b>100% Welcome Bonus</b></p>
         </div>
-        <div className='hero-image-div'><img className='hero-image' src={heroImage} alt="" /></div>
+        {/* <div className='hero-image-div'><img className='hero-image' src={heroImage} alt="" /></div> */}
       </div> 
       <br />
-      */}
+     
 
       <section className='match-display'>
         <div>
@@ -133,46 +133,49 @@ function ContentArea() {
             </div>
 
             <div className='markets flex'>
-              <div>+Markets</div>
+              <div>COM</div>
             </div>
           </div>
 
-
-          <div className='upc-fixtures-display p-3 flex justify-between'>
-            <div className='upc-match-info flex'>
-              <div>
-                <b className='text-white'>15:00</b>
-                <br />
-                TODAY
+          {data.map((match, index) => (
+            <div key={index} className='upc-fixtures-display p-3 flex justify-between'>
+              <div className='upc-match-info flex'>
+                <div>
+                  <b className='text-white'>15:00</b>
+                  <br />
+                  TODAY
+                </div>
+                <div className='match-status-display grid place-content-center'>[icon]</div>
               </div>
-              <div className='match-status-display grid place-content-center'>[icon]</div>
+
+              <div className='upc-odds-header flex justify-between v-center'>
+
+                <div className='upc-home-team flex'>
+                  <b className='text-white'>{match.homeTeam.tla}</b>
+                  <img src={match.homeTeam.crest} alt="" />
+                </div>
+
+                <div className='inner-upc-odds-header upc-odds-display text-white'>
+                  <div>{match.odds.homeWin}</div>
+                  <div>{match.odds.draw}</div>
+                  <div>{match.odds.awayWin}</div>
+                </div>
+
+                <div className='upc-away-team flex'>
+                  <img src={match.awayTeam.crest} alt="" />
+                  <b className='text-white'>{match.awayTeam.tla}</b>
+                </div>
+
+              </div>
+
+              <div className='markets flex justify-between'>
+                
+                {/* <div>{match.competition.code}</div> */} {/* uncomment to add competiton code alongside emblem in the 'COM' section */}
+                <div className='mkt-img'><img src={match.competition.emblem} alt="" /></div>
+              </div>
+
             </div>
-
-            <div className='upc-odds-header flex justify-between v-center'>
-
-              <div className='upc-home-team flex'>
-                <b className='text-white'>Chelsea</b>
-                <img src="https://crests.football-data.org/61.png" alt="" />
-              </div>
-
-              <div className='inner-upc-odds-header upc-odds-display'>
-                <div>1.72</div>
-                <div>3.40</div>
-                <div>2.01</div>
-              </div>
-
-              <div className='upc-away-team flex'>
-                <img src="https://crests.football-data.org/57.png" alt="" />
-                <b className='text-white'>Arsenal</b>
-              </div>
-
-            </div>
-
-            <div className='markets grid place-content-center'>
-              <div>+140</div>
-            </div>
-
-          </div>
+          ))}
         </div>
       </section>
     </div>

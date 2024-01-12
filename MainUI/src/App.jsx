@@ -13,7 +13,7 @@ function App() {
     <>
       <Nav/>
       {/* <br /> */}
-      <div className='flex justify-around w-screen p-5'>
+      <div className='flex justify-around w-screen py-5'>
         <LeftSideBar />
         <ContentArea />
         <RightSideBar />

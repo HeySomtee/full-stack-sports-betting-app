@@ -2,14 +2,28 @@
 .left-side-bar {
     width: 10vw;
     color: #808080;
+    /* background-color: #fff; */
 }
 
-.items div {
-    padding: 5px 10px;
+.items > div {
+    padding: 5px 15px;
     font-size: 0.9em;
     border-radius: 4px;
     display: flex;
-    place-content: center;
+    cursor: pointer;
+}
+
+
+h4 {
+    padding: 0px 25px;
+}
+
+.items > div > div{
+    display: flex;
+}
+
+.items > div > div > span{
+    margin-left: 10px;
 }
 
 input {
