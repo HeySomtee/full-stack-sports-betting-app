@@ -57,9 +57,9 @@ function Upcoming({ data, setData }) {
                   </div>
 
                   <div className='inner-upc-odds-header upc-odds-display text-white'>
-                    <div>{match.odds.homeWin}</div>
-                    <div>{match.odds.draw}</div>
-                    <div>{match.odds.awayWin}</div>
+                    <div id={`${match.id}-home`} >{match.odds.homeWin}</div>
+                    <div id={`${match.id}-draw`} >{match.odds.draw}</div>
+                    <div id={`${match.id}-away`} >{match.odds.awayWin}</div>
                   </div>
 
                   <div className='upc-away-team flex'>

@@ -51,15 +51,15 @@ function Live({ data, setData }) {
               <br />
 
               <div className='odds-container flex justify-between'>
-                <div>
+                <div id={`${match.id}-home`} >
                   <small>1</small>
                   <small>{match.odds.homeWin}</small>
                 </div>
-                <div>
+                <div id={`${match.id}-draw`} >
                   <small>x</small>
                   <small>{match.odds.draw}</small>
                 </div>
-                <div>
+                <div id={`${match.id}-away`} >
                   <small>2</small>
                   <small>{match.odds.awayWin}</small>
                 </div>
