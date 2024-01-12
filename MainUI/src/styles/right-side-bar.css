@@ -1,5 +1,26 @@
 .right-side-bar {
     width: 23vw;
     min-height: 50vh;
-    background-color: #ffffff2f;
+    color:#808080;
+}
+
+.right-side-bar-header {
+    width: 55%;
+    font-size: 0.9em;
+}
+
+.right-side-bar-header > span{
+    cursor: pointer;
+}
+
+.active {
+    font-weight: 600;
+    color: #fff;
+}
+
+.prompt-message {
+    width: 90%;
+    background-color: #5f5e5e1f;
+    font-size: 0.8em;
+    border-radius: 5px;
 }

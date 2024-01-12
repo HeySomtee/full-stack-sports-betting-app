@@ -11,9 +11,10 @@ function App() {
   
   return (
     <>
+
       <Nav/>
-      {/* <br /> */}
-      <div className='flex justify-around w-screen py-5'>
+      <br />
+      <div className='flex justify-around w-screen py-2'>
         <LeftSideBar />
         <ContentArea />
         <RightSideBar />

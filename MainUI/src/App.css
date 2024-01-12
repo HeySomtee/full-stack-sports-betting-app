@@ -16,8 +16,8 @@ body{
 
 /* Chrome, Edge and Safari */
 *::-webkit-scrollbar {
-  height: 7px;
-  width: 7px;
+  height: 4px;
+  width: 4px;
 }
 *::-webkit-scrollbar-track {
   border-radius: 4px;

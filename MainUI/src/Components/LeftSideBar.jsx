@@ -7,7 +7,7 @@ import '../styles/left-side-bar.css';
 library.add(fas);
 
 function LeftSideBar() {
-  const [activeItem, setActiveItem] = useState(null);
+  const [activeItem, setActiveItem] = useState('home');
 
   const handleItemClick = (item) => {
     setActiveItem(item);

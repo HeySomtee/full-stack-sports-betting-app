@@ -6,6 +6,9 @@
     color: #808080;
 }
 
+.nav-bar span {
+    cursor: pointer;
+}
 
 .sub-1 {
     width: 37vw;
