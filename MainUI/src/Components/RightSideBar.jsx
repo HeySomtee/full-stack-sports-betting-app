@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Message from './SubComponents/Message'
 import '../styles/right-side-bar.css'
+import { useLocalStorageSelections } from './SubComponents/utils'
 
 function RightSideBar() {
   const [slipCount, setSlipCount] = useState(0)

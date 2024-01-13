@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocalStorageSelections } from './utils';
 import Message from './Message';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -10,7 +9,6 @@ library.add(fas);
 
 
 function Live({ data, setData }) {
-  const { localStorageItems, addToSlip } = useLocalStorageSelections('slipSelections1');
   const hasMatches = data.some(match => match.competition.id === 2021);
   return (
     <>
@@ -60,10 +58,10 @@ function Live({ data, setData }) {
               <div 
                 id={match.id} 
                 className='1'
-                onClick={addToSlip}
-                style={{
-                  backgroundColor: localStorageItems.some(item => item.className === '1' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
-                }}
+                onClick={()=> {alert('can not bet on matches that are already live')}}
+                // style={{
+                //   backgroundColor: localStorageItems.some(item => item.className === '1' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
+                // }}
               >
                 <small>1</small>
                 <small>{match.odds.homeWin}</small>
@@ -72,10 +70,10 @@ function Live({ data, setData }) {
               <div 
                 id={match.id} 
                 className='x'
-                onClick={addToSlip}
-                style={{
-                  backgroundColor: localStorageItems.some(item => item.className === 'x' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
-                }}
+                onClick={()=> {alert('can not bet on matches that are already live')}}
+                // style={{
+                //   backgroundColor: localStorageItems.some(item => item.className === 'x' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
+                // }}
               >
                 <small>x</small>
                 <small>{match.odds.draw}</small>
@@ -84,10 +82,10 @@ function Live({ data, setData }) {
               <div 
                 id={match.id} 
                 className='2'
-                onClick={addToSlip}
-                style={{
-                  backgroundColor: localStorageItems.some(item => item.className === '2' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
-                }}
+                onClick={()=> {alert('can not bet on matches that are already live')}}
+                // style={{
+                //   backgroundColor: localStorageItems.some(item => item.className === '2' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
+                // }}
               >
                 <small>2</small>
                 <small>{match.odds.awayWin}</small>

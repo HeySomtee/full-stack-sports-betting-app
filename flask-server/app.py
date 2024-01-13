@@ -28,14 +28,14 @@ def get_api_data():
 @app.route('/api/odds', methods=['POST'])
 def receive_data_from_frontend():
     data = request.json 
-    print('Received data:', data)
+    # remove duplicates
+    slip_ids = {item['id'] for item in data['key']}
+    print('Received data:', slip_ids)
+    # Manipulate and pull data from main api dat from info gotten from the frontend (data)
 
+    #will still modify response_data to be info for the slip UI display 
     response_data = {'message': "recived"}
-
-    response = jsonify(response_data)
-    # response.headers.add('Access-Control-Allow-Origin', 'http://localhost:5000')  # Replace with the actual origin of your React frontend
-
-    
+    response = jsonify(response_data) 
     return response
 
 if __name__ == '__main__':

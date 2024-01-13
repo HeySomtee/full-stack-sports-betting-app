@@ -1,33 +1,38 @@
 // useLocalStorageSelections.js
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export const useLocalStorageSelections = (storageKey) => {
-
   const [localStorageItems, setLocalStorageItems] = useState(
     JSON.parse(localStorage.getItem(storageKey)) || []
   );
+
+  useEffect(() => {
+    localStorage.setItem(storageKey, JSON.stringify(localStorageItems));
+  }, [localStorageItems, storageKey]);
 
   const addToSlip = (event) => {
     const clickedElement = event.target;
     const elementId = clickedElement.id;
     const elementClass = clickedElement.className;
 
-    const selection = { id: elementId, className: elementClass };
+    // Create a new array instead of modifying the existing one
+    const updatedItems = [...localStorageItems];
 
-    const selectionIndex = localStorageItems.findIndex(
+    const selectionIndex = updatedItems.findIndex(
       (item) => item.id === elementId && item.className === elementClass
     );
 
     if (selectionIndex !== -1) {
-      localStorageItems.splice(selectionIndex, 1);
+      // Remove if already exists
+      updatedItems.splice(selectionIndex, 1);
     } else {
-      localStorageItems.push(selection);
+      // Add to array
+      updatedItems.push({ id: elementId, className: elementClass });
     }
 
-    localStorage.setItem(storageKey, JSON.stringify(localStorageItems));
-    setLocalStorageItems([...localStorageItems]);
+    setLocalStorageItems(updatedItems);
     console.log(`${storageKey}:`);
-    console.log(localStorageItems);
+    console.log(updatedItems);
   };
 
   return { localStorageItems, addToSlip };

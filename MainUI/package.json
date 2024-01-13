@@ -5,7 +5,9 @@
   "type": "module",
   "proxy": "http://127.0.0.1:5000/",
   "scripts": {
+    "start": "cross-env PYTHON_PATH=C:/Users/DELL/Desktop/Flaskapp/Flask-server/app.py npm-run-all --parallel python dev",
     "dev": "vite",
+    "python": "python %PYTHON_PATH%",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -18,6 +20,7 @@
     "autoprefixer": "^10.4.16",
     "axios": "^1.6.3",
     "http-proxy-middleware": "^2.0.6",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.32",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

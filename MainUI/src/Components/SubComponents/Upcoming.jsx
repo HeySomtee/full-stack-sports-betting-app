@@ -11,7 +11,8 @@ import Message from './Message';
 library.add(fas);
 
 function Upcoming({ data, setData }) {
-  const { localStorageItems, addToSlip } = useLocalStorageSelections('slipSelections2');
+  const storageKey = 'slipSelections'; // Same key for both components
+  const { localStorageItems, addToSlip } = useLocalStorageSelections(storageKey);
   const [responseMessage, setResponseMessage] = useState({});
   const nHasMatches = data.some(match => match.competition.id && match.competition.id !== 2021);
 
