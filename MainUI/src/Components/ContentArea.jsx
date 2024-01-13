@@ -5,7 +5,6 @@ import Upcoming from './SubComponents/Upcoming';
 
 function ContentArea() {
   const [data, setData] = useState([])
-
   useEffect(() => {
     const fetchData = async () => {
       try {

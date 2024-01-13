@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Message from './SubComponents/Message'
 import '../styles/right-side-bar.css'
 
 function RightSideBar() {
@@ -26,12 +27,9 @@ function RightSideBar() {
       <br />
 
       <div className='right-side-content'>
-        <div className='flex'>
-          <div className='prompt-message p-4'>
-            <h3 className='active'>Your betslip is empty</h3>
-            <p>Please make one or more selections in order to place bets</p>
-          </div>
-        </div>
+        <Message header="Your betslip is empty">
+          Please make one or more selections in order to place bets
+        </Message>
 
 
         {/* stack bet slips from backend */}

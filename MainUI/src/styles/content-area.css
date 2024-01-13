@@ -3,7 +3,7 @@
     /* background-color: #ffffff2f; */
     color: #808080;
     width: 60vw;
-    height:100vh;
+    height:105vh;
     overflow-y: scroll;
 
 }
@@ -58,7 +58,7 @@
 }
 
 .live-match-container::-webkit-scrollbar {
-   height: 4px;
+   height: 2px;
 }
 
 
@@ -131,6 +131,10 @@ i {
     justify-content: space-around;
     align-items: center;
     width: 30%;
+}
+
+.odds-container small {
+    pointer-events: none;
 }
 
 .upcoming-match-display {
@@ -223,3 +227,6 @@ i {
     
 }
 
+.selected-match {
+    background-color: #144fce;
+}

@@ -12,15 +12,3 @@
 .right-side-bar-header > span{
     cursor: pointer;
 }
-
-.active {
-    font-weight: 600;
-    color: #fff;
-}
-
-.prompt-message {
-    width: 90%;
-    background-color: #5f5e5e1f;
-    font-size: 0.8em;
-    border-radius: 5px;
-}
