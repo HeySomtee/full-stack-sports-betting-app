@@ -31,7 +31,6 @@ function App() {
   const processData  = (newData) => {
     var Matches = newData.matches
     setData(Matches)
-    console.log(Matches);
   } 
 
   return (

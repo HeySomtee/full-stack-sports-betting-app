@@ -14,7 +14,7 @@ def get_api_data():
     
     url = "http://api.football-data.org/v4/matches"
     headers = {
-        'X-Auth-Token': '4cd97aa4596f477eaf41f79164f7cb7c',
+        'X-Auth-Token': '73fdb77b3269470da61ca7234e7da2b8',
         "X-Unfold-Goals": "true",
     }
     params = {

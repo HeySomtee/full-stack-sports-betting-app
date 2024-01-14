@@ -12,3 +12,8 @@
 .right-side-bar-header > span{
     cursor: pointer;
 }
+
+.active{
+    font-weight: 600;
+    color: #fff;
+}

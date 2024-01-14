@@ -1,4 +1,3 @@
-// useLocalStorageSelections.js
 import { useState, useEffect } from 'react';
 
 export const useLocalStorageSelections = (storageKey) => {
@@ -14,8 +13,6 @@ export const useLocalStorageSelections = (storageKey) => {
     const clickedElement = event.target;
     const elementId = clickedElement.id;
     const elementClass = clickedElement.className;
-
-    // Create a new array instead of modifying the existing one
     const updatedItems = [...localStorageItems];
 
     const selectionIndex = updatedItems.findIndex(
@@ -23,10 +20,8 @@ export const useLocalStorageSelections = (storageKey) => {
     );
 
     if (selectionIndex !== -1) {
-      // Remove if already exists
       updatedItems.splice(selectionIndex, 1);
     } else {
-      // Add to array
       updatedItems.push({ id: elementId, className: elementClass });
     }
 

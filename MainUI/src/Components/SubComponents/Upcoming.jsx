@@ -7,6 +7,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-regular-svg-icons';
 import Message from './Message';
+import RightSideBar from '../RightSideBar'
 
 library.add(fas);
 
@@ -44,6 +45,7 @@ function Upcoming({ data, setData }) {
  
   return (
     <>
+      
       <section>
         <div>
           <h2><b className='text-white text-lg'>Football</b> Upcoming</h2>

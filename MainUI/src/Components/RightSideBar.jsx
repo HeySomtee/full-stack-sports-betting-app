@@ -3,7 +3,7 @@ import Message from './SubComponents/Message'
 import '../styles/right-side-bar.css'
 import { useLocalStorageSelections } from './SubComponents/utils'
 
-function RightSideBar() {
+function RightSideBar({store}) {
   const [slipCount, setSlipCount] = useState(0)
   const [betCount, setbetCount] = useState(0)
   const [isactive, setIsActive] = useState('bet-slip')
@@ -32,7 +32,7 @@ function RightSideBar() {
           Please make one or more selections in order to place bets
         </Message>
 
-
+        {/* {store} */}
         {/* stack bet slips from backend */}
       </div>
     </div>
