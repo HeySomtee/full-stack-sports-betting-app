@@ -18,7 +18,7 @@ function LeftSideBar() {
       <div className='left-side-bar'>
         <div>
           <br />
-          <h4 className='mb-4'><b>Navigation</b></h4> 
+          <h4 className='mb-4'>Navigation</h4> 
           <div className='items'>
             <div className={activeItem === 'home' ? 'bg-primary-800' : ''} onClick={() => handleItemClick('home')}>
               <div>
@@ -45,7 +45,7 @@ function LeftSideBar() {
         <br /> 
 
         <div>
-          <h4 className='mb-4'><b>Sports</b></h4>
+          <h4 className='mb-4'>Sports</h4>
           <div className='items'>
             <div className={activeItem === 'football' ? 'bg-primary-800' : ''} onClick={() => handleItemClick('football')}>
               <div>

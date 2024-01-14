@@ -3,7 +3,7 @@ import '../styles/content-area.css'
 import Live from './SubComponents/Live';
 import Upcoming from './SubComponents/Upcoming';
 
-function ContentArea({ data, setData }) {
+function ContentArea({ data, setData, localStorageItems, addToSlip  }) {
 
   return (
     <div className='main-content'>
@@ -17,7 +17,7 @@ function ContentArea({ data, setData }) {
       <br />
      <Live data={data} setData={setData}/>
       <br /> 
-      <Upcoming data={data} setData={setData}/>
+      <Upcoming data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip}/>
     </div>
   )
 }

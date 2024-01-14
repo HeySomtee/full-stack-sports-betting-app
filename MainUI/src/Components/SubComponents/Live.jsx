@@ -12,6 +12,7 @@ function Live({ data, setData }) {
   const hasMatches = data.some(match => match.competition.id === 2021);
   return (
     <>
+    {/* TODO: add draw down notif for trying to stake on live matches */}
       <section className='match-display'>
         <div>
           <span><b className='text-white text-lg'>Live</b> Matches</span>

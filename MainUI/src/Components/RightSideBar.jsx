@@ -1,42 +1,53 @@
-import React, { useEffect, useState } from 'react'
-import Message from './SubComponents/Message'
-import '../styles/right-side-bar.css'
-import { useLocalStorageSelections } from './SubComponents/utils'
+import React, { useEffect, useState } from 'react';
+import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import '../styles/right-side-bar.css';
+import BetSlip from './SubComponents/BetSlip';
+import BetHistory from './SubComponents/BetHistory';
 
-function RightSideBar({store}) {
-  const [slipCount, setSlipCount] = useState(0)
-  const [betCount, setbetCount] = useState(0)
-  const [isactive, setIsActive] = useState('bet-slip')
+function RightSideBar({ data, setData, localStorageItems, addToSlip }) {
+  const [slipCount, setSlipCount] = useState(0);
+  const [betCount, setBetCount] = useState(0);
+  const [isActive, setIsActive] = useState('bet-slip');
+
+  useEffect(() => {
+    console.log(localStorageItems);
+  }, [localStorageItems]);
 
   const toggleActive = (param) => {
-    setIsActive(param)
-  }
+    setIsActive(param);
+  };
 
   return (
-    <div className='right-side-bar'>
-      <div className='right-side-bar-header flex justify-between'>
-        <span 
-          className={isactive === 'bet-slip' ? 'active' : '' }
-          onClick={() => toggleActive('bet-slip')}
-        >Bet Slip {slipCount}</span>
+    <Router>
+      <div className='right-side-bar'>
+        <div className='right-side-bar-header flex justify-between'>
+          <Link 
+            to="/bet-slip" 
+            className={isActive === 'bet-slip' ? 'active' : ''}
+            onClick={ () => toggleActive('bet-slip')}  
+          >
+            Bet Slip {slipCount}
+          </Link>
 
-        <span 
-        className={isactive === 'bet-count'? 'active' : '' }
-        onClick={ () => toggleActive('bet-count')}
-        >Bet History {betCount}</span>
+          <Link 
+            to="/bet-history" 
+            className={isActive === 'bet-count' ? 'active' : ''} 
+            onClick={ () => toggleActive('bet-count')} >
+            Bet History {betCount}
+          </Link>
+        </div>
+        <br />
+
+        <div className='right-side-content'>
+          <Routes>
+            <Route path="/" element={<BetSlip />} />
+            <Route path="/bet-slip" element={<BetSlip />} />
+            <Route path="/bet-history" element={<BetHistory />} />
+          </Routes>
+        </div>
       </div>
-      <br />
-
-      <div className='right-side-content'>
-        <Message header="Your betslip is empty">
-          Please make one or more selections in order to place bets
-        </Message>
-
-        {/* {store} */}
-        {/* stack bet slips from backend */}
-      </div>
-    </div>
-  )
+    </Router>
+  );
 }
 
-export default RightSideBar
+export default RightSideBar;

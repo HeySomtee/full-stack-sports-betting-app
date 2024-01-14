@@ -26,8 +26,8 @@ export const useLocalStorageSelections = (storageKey) => {
     }
 
     setLocalStorageItems(updatedItems);
-    console.log(`${storageKey}:`);
-    console.log(updatedItems);
+    // console.log(`${storageKey}:`);
+    // console.log(updatedItems);
   };
 
   return { localStorageItems, addToSlip };
