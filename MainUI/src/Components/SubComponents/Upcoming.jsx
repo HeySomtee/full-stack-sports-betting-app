@@ -7,40 +7,14 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-regular-svg-icons';
 import Message from './Message';
 import RightSideBar from '../RightSideBar'
+import { useLocalStorageSelections } from './utils';
 
 library.add(fas);
 
 function Upcoming({ data, setData, localStorageItems, addToSlip }) {
-
   const [responseMessage, setResponseMessage] = useState({});
   const nHasMatches = data.some(match => match.competition.id && match.competition.id !== 2021);
 
-  const sendDataToBackend = async () => {
-    try {
-      const response = await axios.post('http://127.0.0.1:5000/api/odds', {
-        key:{
-              userId: 'user123',
-              bets: [
-                {
-                  matchId: 'match001',
-                  team: 'Team A',
-                  odds: 2.5,
-                  amountStaked: 50,
-                  result: 'win',
-                },
-              ],
-              }
-            });
-
-      const responseData = response.data;
-      setResponseMessage('Response from Backend: ' + responseData.message);
-      console.log(responseMessage);
-    } catch (error) {
-      console.error('Error sending data to backend:', error.message);
-    }
-  };
-
- 
   return (
     <>
       

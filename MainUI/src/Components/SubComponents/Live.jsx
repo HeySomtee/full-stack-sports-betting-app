@@ -4,21 +4,36 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-regular-svg-icons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 library.add(fas);
 
 
 function Live({ data, setData }) {
+  const notify = () => toast.error("can't bet on live matches");
   const hasMatches = data.some(match => match.competition.id === 2021);
   return (
     <>
-    {/* TODO: add draw down notif for trying to stake on live matches */}
       <section className='match-display'>
         <div>
           <span><b className='text-white text-lg'>Live</b> Matches</span>
         </div>
         <br />
         <div className='live-match-container flex'> 
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition: Bounce
+        />
         {hasMatches ? (
       data.map((match, index) => (
         match.competition.id === 2021 ? (
@@ -59,7 +74,7 @@ function Live({ data, setData }) {
               <div 
                 id={match.id} 
                 className='1'
-                onClick={()=> {alert('can not bet on matches that are already live')}}
+                onClick={notify}
                 // style={{
                 //   backgroundColor: localStorageItems.some(item => item.className === '1' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
                 // }}
@@ -71,7 +86,7 @@ function Live({ data, setData }) {
               <div 
                 id={match.id} 
                 className='x'
-                onClick={()=> {alert('can not bet on matches that are already live')}}
+                onClick={notify}
                 // style={{
                 //   backgroundColor: localStorageItems.some(item => item.className === 'x' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
                 // }}
@@ -83,7 +98,7 @@ function Live({ data, setData }) {
               <div 
                 id={match.id} 
                 className='2'
-                onClick={()=> {alert('can not bet on matches that are already live')}}
+                onClick={notify}
                 // style={{
                 //   backgroundColor: localStorageItems.some(item => item.className === '2' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
                 // }}

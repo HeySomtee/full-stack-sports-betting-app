@@ -45,6 +45,9 @@ body{
   background-color: #d61a1a;
 }
 
-
-
+.Toastify__progress-bar-theme--dark {
+  background-color: #144FCE;
+  color: #144FCE;
+  width: 10px;
+}
 

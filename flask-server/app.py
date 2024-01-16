@@ -9,8 +9,8 @@ CORS(app)
 @app.route('/api/data/')
 
 def get_api_data():
-    dateFrom = "2024-01-13"
-    dateTo = "2024-01-15"
+    dateFrom = "2023-12-01"
+    dateTo = "2023-12-10"
     
     url = "http://api.football-data.org/v4/matches"
     headers = {
