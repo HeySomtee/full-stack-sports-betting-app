@@ -12,7 +12,7 @@ import { useLocalStorageSelections } from './Components/SubComponents/utils';
 function App() {
   const [data, setData] = useState([])
   const storageKey = 'slipSelections';
-  const { localStorageItems, addToSlip } = useLocalStorageSelections(storageKey);
+  const { localStorageItems, betSlip, addToSlip } = useLocalStorageSelections(storageKey, data);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,7 +46,7 @@ function App() {
       <div className='flex justify-around w-screen py-2'>
         <LeftSideBar />
         <ContentArea data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip} />
-        <RightSideBar data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip} />
+        <RightSideBar data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip} betSlip={betSlip} />
       </div>
      
     </>

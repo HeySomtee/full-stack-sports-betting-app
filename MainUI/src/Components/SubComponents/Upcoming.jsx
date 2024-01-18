@@ -71,28 +71,28 @@ function Upcoming({ data, setData, localStorageItems, addToSlip }) {
                       <div className='inner-upc-odds-header upc-odds-display text-white'>
                         <div 
                           id={match.id} 
-                          className='1' 
+                          className='homeWin' 
                           onClick={addToSlip}
                           style={{
-                            backgroundColor: localStorageItems.some(item => item.className === '1' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
+                            backgroundColor: localStorageItems.some(item => item.className === 'homeWin' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
                           }}
                         >
                         {match.odds.homeWin}</div>
                         <div 
                           id={match.id} 
-                          className='x' 
+                          className='draw' 
                           onClick={addToSlip}
                           style={{
-                            backgroundColor: localStorageItems.some(item => item.className === 'x' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
+                            backgroundColor: localStorageItems.some(item => item.className === 'draw' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
                           }}
                         >
                         {match.odds.draw}</div>
                         <div 
                           id={match.id} 
-                          className='2' 
+                          className='awayWin' 
                           onClick={addToSlip}
                           style={{
-                            backgroundColor: localStorageItems.some(item => item.className === '2' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
+                            backgroundColor: localStorageItems.some(item => item.className === 'awayWin' && item.id === `${match.id}`) ? '#144fce' : '#52505069'
                           }}
                         >
                         {match.odds.awayWin}</div>

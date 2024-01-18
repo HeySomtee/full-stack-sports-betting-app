@@ -64,7 +64,7 @@ function Live({ data, setData }) {
               </div>
               <div className='away-team-text flex justify-between'>
                 <span>{match.awayTeam.shortName}</span>
-                <span>{match.score.fullTime.home}</span>
+                <span>{match.score.fullTime.away}</span>
               </div>
             </div>
 
