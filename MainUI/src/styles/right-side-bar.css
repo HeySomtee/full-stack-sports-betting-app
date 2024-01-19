@@ -50,6 +50,7 @@
 
 .picked-teams {
     max-width: 80%;
+    margin: 5px 0px;
 }
 
 .picked-teams > small {
@@ -69,6 +70,7 @@
     color: #fff;
     padding: 0px 5px;
     border-radius: 2px;
+    
     /* display: none; */
 }
 
@@ -93,3 +95,4 @@ input {
     background-color: #144fce;
     color: #fff;
 }
+

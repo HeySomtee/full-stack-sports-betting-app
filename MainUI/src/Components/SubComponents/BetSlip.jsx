@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Message from './Message';
+import axios from 'axios';
 
-function BetSlip({ localStorageItems, data, setData }) {
+function BetSlip({ localStorageItems, data, setData, addToSlip}) {
+  const [responseMessage, setResponseMessage] = useState('');
   const [slipObjects, setSlipObjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -29,6 +31,20 @@ function BetSlip({ localStorageItems, data, setData }) {
   useEffect(() => {
     console.log(slipObjects);
   }, [slipObjects]);
+
+  const sendDataToBackend = async () => {
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/api/odds', {
+        key: slipObjects
+        });
+
+      const responseData = response.data;
+      setResponseMessage('Response from Backend: ' + responseData.message);
+      console.log(responseMessage);
+    } catch (error) {
+      console.error('Error sending data to backend:', error.message);
+    }
+  };
 
   return (
     <>
@@ -60,7 +76,7 @@ function BetSlip({ localStorageItems, data, setData }) {
                   </div>
                 </div>
                 <div>
-                  <small>X</small>
+                  <small className={slipItem.className && slipItem.className} id={slipItem.id && slipItem.id} onClick={addToSlip}>X</small>
                 </div>
               </div>
               <div className='flex justify-between'>
@@ -89,7 +105,10 @@ function BetSlip({ localStorageItems, data, setData }) {
             <h3>Potential Win</h3>
             <h3>0</h3>
           </div>
-          <div className='submit-slip'>Place Bet</div>
+          <div 
+            className='submit-slip'
+            onClick={sendDataToBackend}
+          >Place Bet</div>
         </div>
 
       </div>

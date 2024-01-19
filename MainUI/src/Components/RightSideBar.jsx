@@ -8,32 +8,7 @@ function RightSideBar({ data, setData, localStorageItems, addToSlip}) {
   const [slipCount, setSlipCount] = useState(0);
   const [betCount, setBetCount] = useState(0);
   const [isActive, setIsActive] = useState('bet-slip');
-
-  const sendDataToBackend = async () => {
-    try {
-      const response = await axios.post('http://127.0.0.1:5000/api/odds', {
-        key:{
-              userId: 'user123',
-              bets: [
-                {
-                  matchId: 'match001',
-                  team: 'Team A',
-                  odds: 2.5,
-                  amountStaked: 50,
-                  result: 'win',
-                },
-              ],
-              }
-            });
-
-      const responseData = response.data;
-      setResponseMessage('Response from Backend: ' + responseData.message);
-      console.log(responseMessage);
-    } catch (error) {
-      console.error('Error sending data to backend:', error.message);
-    }
-  };
-
+  
   // useEffect(() => {
   //   console.log(localStorageItems); 
   // }, [localStorageItems]);
@@ -66,7 +41,7 @@ function RightSideBar({ data, setData, localStorageItems, addToSlip}) {
         <div className='right-side-content'>
           <Routes>
             <Route path="/" element={<BetSlip data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip} />} />
-            <Route path="/bet-slip" element={<BetSlip data={data} setData={setData} localStorageItems={localStorageItems}/>} />
+            <Route path="/bet-slip" element={<BetSlip data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip}/>} />
             <Route path="/bet-history" element={<BetHistory />} />
           </Routes>
         </div>

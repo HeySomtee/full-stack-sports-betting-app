@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +11,7 @@ import { useLocalStorageSelections } from './utils';
 library.add(fas);
 
 function Upcoming({ data, setData, localStorageItems, addToSlip }) {
-  const [responseMessage, setResponseMessage] = useState({});
+  
   const nHasMatches = data.some(match => match.competition.id && match.competition.id !== 2021);
 
   return (
