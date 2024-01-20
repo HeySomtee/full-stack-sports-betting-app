@@ -75,8 +75,8 @@ function BetSlip({ localStorageItems, data, setData, addToSlip}) {
                     </small>
                   </div>
                 </div>
-                <div>
-                  <small className={slipItem.className && slipItem.className} id={slipItem.id && slipItem.id} onClick={addToSlip}>X</small>
+                <div className='remove-slip-item'>
+                  <small className={slipItem.className} id={slipItem.id} onClick={addToSlip}>x</small>
                 </div>
               </div>
               <div className='flex justify-between'>

@@ -4,7 +4,9 @@ import Nav from './Components/Nav'
 import LeftSideBar from './Components/LeftSideBar'
 import ContentArea from './Components/ContentArea'
 import RightSideBar from './Components/RightSideBar'
-import Test from './Components/Test';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './Components/Login';
+import SignUP from './Components/SignUP';
 import { useLocalStorageSelections } from './Components/SubComponents/utils';
 
 
@@ -40,15 +42,27 @@ function App() {
 
   return (
     <>
-
-      <Nav/>
-      <br />
-      <div className='flex justify-around w-screen py-2'>
-        <LeftSideBar />
-        <ContentArea data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip} />
-        <RightSideBar data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip} betSlip={betSlip} />
-      </div>
-     
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUP />} />
+          {/* <br /> */}
+          <Route
+            path="/"
+            element={
+              <>
+                <Nav />
+                <br />
+                <div className='flex justify-around w-screen py-2'>
+                <LeftSideBar />
+                <ContentArea data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip} />
+                <RightSideBar data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip} betSlip={betSlip} />
+              </div>
+              </>
+            }
+          />
+        </Routes>
+      </Router>
     </>
   );
 }

@@ -27,11 +27,11 @@ def get_api_data():
         'X-Auth-Token': '73fdb77b3269470da61ca7234e7da2b8',
         "X-Unfold-Goals": "true",
     }
-    params = {
-        'dateFrom': dateFrom,
-        'dateTo': dateTo
-    }
-    response = requests.get(url, headers=headers, params=params)
+    # params = {
+    #     'dateFrom': dateFrom,
+    #     'dateTo': dateTo
+    # }
+    response = requests.get(url, headers=headers)
     data = response.json()
     return jsonify(data)
 
