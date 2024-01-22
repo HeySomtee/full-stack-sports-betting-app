@@ -14,7 +14,6 @@ function ContentArea({ data, setData, localStorageItems, addToSlip  }) {
           <p><b>100% Welcome Bonus</b></p>
         </div>
       </div>  */}
-      <br />
      <Live data={data} setData={setData}/>
       <br /> 
       <Upcoming data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip}/>

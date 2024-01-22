@@ -17,7 +17,7 @@
     /* place-content: center; */
     width: 30vw;
     height: 80vh;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(84, 94, 119, 0.2);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(3px);
@@ -56,8 +56,26 @@
     border-radius: 10px;
 }
 
+label {
+    color: #000;
+    font-weight: 500;
+}
+
 /* .form-slide-show{
     width: 55%;
     height: 80%;
     background-color: transparent;
 } */
+
+.Oauth-preloader {
+    animation: 1s infinite ease-in-out;
+}
+
+@keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
