@@ -1,4 +1,4 @@
-import { React, useState} from 'react'
+import { React, useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../styles/login.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +14,21 @@ function SignUP() {
   const [statusVal, setStatusVal] = useState(false)
   const [responseMessage, setResponseMessage] = useState('')
   const navigate = useNavigate();
-  const notify = () => toast(`${responseMessage}`);
+  const notify = () => toast(responseMessage);
+
+
+  useEffect(() => {
+    responseMessage ? notify() : ''
+  }, [responseMessage])
+  
+  useEffect(() => {
+    if (status === 223) {
+      setTimeout(() => {
+        navigate('/login')
+      }, 1000);
+    }
+  }, [status])
+
   const handleLogin = async () => {
     // Make a request to your backend with the form data
     try {
@@ -32,15 +46,20 @@ function SignUP() {
       setResponseMessage(responseData.res);
       console.log(responseData.res);
 
+      showLoader()
+
       if (!response.ok) {
         throw new Error('Login failed');
       }
-      notify()
       
     } catch (error) {
       console.error('Login error:', error.message);
     }
   };
+
+  const showLoader = () => {
+    setStatusVal(prev => !prev);
+  }
   return (
     <div className="login-body">
       <ToastContainer
@@ -100,9 +119,9 @@ function SignUP() {
         <button className='login-btn' onClick={handleLogin}>
           <span
             style={{
-              display: statusVal ? 'none' : 'block'
+              display: statusVal === true ? 'none' : 'block'
             }}
-            onClick={() => {setStatusVal(true)}}
+            onClick={showLoader}
           >
             Sign Up 
           </span>
@@ -110,7 +129,7 @@ function SignUP() {
             <span
              className='Oauth-preloader'
              style={{
-               display: statusVal ? 'block' : 'none',
+               display: statusVal === true ? 'block' : 'none',
                animationName: 'rotate'
              }}
             ><FontAwesomeIcon icon="fa-arrows-rotate" /></span>

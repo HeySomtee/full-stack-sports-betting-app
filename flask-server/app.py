@@ -29,11 +29,11 @@ def get_api_data():
         'X-Auth-Token': '73fdb77b3269470da61ca7234e7da2b8',
         "X-Unfold-Goals": "true",
     }
-    # params = {
-    #     'dateFrom': dateFrom,
-    #     'dateTo': dateTo
-    # }
-    response = requests.get(url, headers=headers)
+    params = {
+        'dateFrom': dateFrom,
+        'dateTo': dateTo
+    }
+    response = requests.get(url, headers=headers, params=params)
     data = response.json()
     return jsonify(data)
 
@@ -70,6 +70,26 @@ def signup():
         response = jsonify(response_message)
         print(response.data) 
         return response.data, 223
+    
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        user_email = request.json.get('email')
+        password = request.json.get('password')
+        
+        existing_user = collection.find_one({'useremail': user_email, 'password': password})
+        if existing_user:
+            response_message = {'res': 'User login successful'}
+            response = jsonify(response_message)
+            print(response.data) 
+            return response.data, 223
+        else:
+            response_message = {'res': 'invalid email or password'}
+            response = jsonify(response_message)
+            return response, 222
+            
+            
+        
         
 
 if __name__ == '__main__':
