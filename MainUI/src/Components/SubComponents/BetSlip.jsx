@@ -6,12 +6,15 @@ function BetSlip({ localStorageItems, data, setData, addToSlip}) {
   const [responseMessage, setResponseMessage] = useState('');
   const [slipObjects, setSlipObjects] = useState([]);
   const [loading, setLoading] = useState(true);
+  const accessToken = localStorage.getItem('access_token');
+
 
   useEffect(() => {
     const itemsId = localStorageItems.map(item => parseInt(item.id));
     let matchingObjects = data.filter(match => itemsId.includes(match.id));
     const mappedArray = localStorageItems.map(item1 => {
-      const matchingItem = matchingObjects.find(item2 => item2.id === parseInt(item1.id));
+    const matchingItem = matchingObjects.find(item2 => item2.id === parseInt(item1.id));
+
       if (matchingItem) {
         return {
           ...item1,
@@ -35,9 +38,13 @@ function BetSlip({ localStorageItems, data, setData, addToSlip}) {
   const sendDataToBackend = async () => {
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/odds', {
-        key: slipObjects
-        });
-
+        key: slipObjects,
+      }, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
       const responseData = response.data;
       setResponseMessage('Response from Backend: ' + responseData.message);
       console.log(responseMessage);

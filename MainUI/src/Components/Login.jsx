@@ -7,30 +7,21 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 
 
-function Login() {
+function Login( { setIsAuthenticated } ) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [status, setStatus] = useState(0)
-  const [statusVal, setStatusVal] = useState(false)
-  const [responseMessage, setResponseMessage] = useState('')
+  const [status, setStatus] = useState(0);
+  const [statusVal, setStatusVal] = useState(false);
+  const [responseMessage, setResponseMessage] = useState('');
   const navigate = useNavigate();
   const notify = () => toast(responseMessage);
 
-
   useEffect(() => {
-    responseMessage ? notify() : ''
-  }, [responseMessage])
-  
-  useEffect(() => {
-    if (status === 223) {
-      setTimeout(() => {
-        navigate('/')
-      }, 1000);
-    }
-  }, [status])
+     responseMessage ? notify() : ''
+  }, [responseMessage]);
 
+ 
   const handleLogin = async () => {
-    // Make a request to your backend with the form data
     try {
       const response = await fetch('http://127.0.0.1:5000/login', {
         method: 'POST',
@@ -42,16 +33,18 @@ function Login() {
 
       const responseData = await response.json();
       const responseStatus = response.status;
-      setStatus(responseStatus)
+      setStatus(responseStatus);
       setResponseMessage(responseData.res);
-      console.log(responseData.res);
+      localStorage.setItem('access_token', responseData.access_token);
 
-      showLoader()
+      showLoader();
 
-      if (!response.ok) {
-        throw new Error('Login failed');
+      if (response.ok && responseStatus === 223 && localStorage.getItem('access_token')) {
+        setIsAuthenticated(true)
+        setTimeout(() => {
+          navigate('/');
+        }, 1000);
       }
-      
     } catch (error) {
       console.error('Login error:', error.message);
     } finally {
@@ -60,8 +53,8 @@ function Login() {
   };
 
   const showLoader = () => {
-    setStatusVal(prev => !prev);
-  }
+    setStatusVal((prev) => !prev);
+  };
   return (
     <div className="login-body">
       <ToastContainer
