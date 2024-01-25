@@ -2,12 +2,11 @@ import { React, useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../styles/login.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 
 
-function Login( { setIsAuthenticated } ) {
+
+function Login({ setIsAuthenticated, setPayLoad, payLoad }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState(0);
@@ -19,7 +18,6 @@ function Login( { setIsAuthenticated } ) {
   useEffect(() => {
      responseMessage ? notify() : ''
   }, [responseMessage]);
-
  
   const handleLogin = async () => {
     try {
@@ -36,6 +34,11 @@ function Login( { setIsAuthenticated } ) {
       setStatus(responseStatus);
       setResponseMessage(responseData.res);
       localStorage.setItem('access_token', responseData.access_token);
+      
+      const token = responseData.access_token
+      const [header, payload, signature] = token.split('.');      
+      const decodedPayload = JSON.parse(atob(payload));
+      setPayLoad(decodedPayload);
 
       showLoader();
 
@@ -106,9 +109,9 @@ function Login( { setIsAuthenticated } ) {
               color: '#fff',
               textDecoration: 'underline',
               display: status === 222 ? 'block' : 'none'
-            }} onClick={() => {navigate('/login')}}
+            }} onClick={() => {navigate('/signup')}}
             >
-              login?
+              sign up?
             </span>
           </p> 
         <button className='login-btn' onClick={handleLogin}>

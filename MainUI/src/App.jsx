@@ -16,7 +16,12 @@ function App() {
   const storageKey = 'slipSelections';
   const { localStorageItems, betSlip, addToSlip } = useLocalStorageSelections(storageKey, data);
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [payLoad, setPayLoad] = useState([])
   const accessToken = localStorage.getItem('access_token');
+
+  useEffect(() => {
+    console.log(payLoad);
+  }, [payLoad])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,6 +59,8 @@ function App() {
           <Route path="/login" element={
             <Login 
               setIsAuthenticated={setIsAuthenticated} 
+              payLoad={payLoad}
+              setPayLoad={setPayLoad}
             />
             } 
           />
@@ -62,7 +69,7 @@ function App() {
           <Route
             path="/"
             element={
-              isAuthenticated ? (
+              isAuthenticated || localStorage.getItem('access_token') ? (
                 <>
                   <Nav />
                   <br />

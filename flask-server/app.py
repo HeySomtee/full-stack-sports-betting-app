@@ -5,7 +5,7 @@ from flask_pymongo import PyMongo
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson import ObjectId
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, decode_token 
 from datetime import timedelta
 
 
@@ -41,6 +41,8 @@ def get_api_data():
         'dateFrom': dateFrom,
         'dateTo': dateTo
     }
+    authorization_header = request.headers.get('Authorization')
+    print(authorization_header)
     response = requests.get(url, headers=headers, params=params)
     data = response.json()
     return jsonify(data)
