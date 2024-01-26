@@ -18,7 +18,8 @@ function RightSideBar({ data, setData, localStorageItems, addToSlip}) {
   };
 
   return (
-      <div className='right-side-bar'>
+      <>
+        <div className='right-side-bar'>
         <div className='right-side-bar-header flex justify-between'>
           <Link 
             to="/bet-slip" 
@@ -45,6 +46,7 @@ function RightSideBar({ data, setData, localStorageItems, addToSlip}) {
           </Routes>
         </div>
       </div>
+      </>
   );
 }
 

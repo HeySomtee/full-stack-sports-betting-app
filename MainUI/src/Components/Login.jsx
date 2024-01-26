@@ -43,7 +43,7 @@ function Login({ setIsAuthenticated, setPayLoad, payLoad }) {
       showLoader();
 
       if (response.ok && responseStatus === 223 && localStorage.getItem('access_token')) {
-        setIsAuthenticated(true)
+        setIsAuthenticated(true);
         setTimeout(() => {
           navigate('/');
         }, 1000);

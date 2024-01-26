@@ -5,12 +5,11 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-regular-svg-icons';
 import Message from './Message';
-import RightSideBar from '../RightSideBar'
 import { useLocalStorageSelections } from './utils';
 
 library.add(fas);
 
-function Upcoming({ data, setData, localStorageItems, addToSlip }) {
+function Upcoming({ data, setData, localStorageItems, addToSlip, resultCount }) {
   
   const nHasMatches = data.some(match => match.competition.id && match.competition.id !== 2021);
 
@@ -109,13 +108,21 @@ function Upcoming({ data, setData, localStorageItems, addToSlip }) {
                     </div>
                   </div>) : null
                 ))
+              ) : resultCount === 0 ? (
+                <>
+                  <br /> 
+                  <Message header={"Check back tomorrow"}>
+                  There are no matches on our coverage today
+                  </Message>
+                </>
               ) : <>
                     <br /> 
-                    <Message header={"Come back tomorrow!"}>
-                    There are no matches on our coverage today
+                    <Message header={"Loading Upcoming Matches ..."}>
+                    {/* There are no matches on our coverage today */}
                     </Message>
                   </>
             }
+
           </div>
         </div>
       </section>

@@ -7,6 +7,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from bson import ObjectId
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, decode_token 
 from datetime import timedelta
+from datetime import datetime
+import jwt
 
 
 app = Flask(__name__)
@@ -26,6 +28,7 @@ db = client[database_name]
 collection_name = "sportee_db"
 collection = db[collection_name]
 
+
 @app.route('/api/data/')
 @jwt_required()
 def get_api_data():
@@ -41,9 +44,7 @@ def get_api_data():
         'dateFrom': dateFrom,
         'dateTo': dateTo
     }
-    authorization_header = request.headers.get('Authorization')
-    print(authorization_header)
-    response = requests.get(url, headers=headers, params=params)
+    response = requests.get(url, headers=headers)
     data = response.json()
     return jsonify(data)
 
@@ -51,6 +52,7 @@ def get_api_data():
 @jwt_required()
 def receive_data_from_frontend():
     data = request.json 
+    print(data)
     data_to_insert = data
     result = collection.insert_one(data_to_insert)
 
@@ -60,6 +62,8 @@ def receive_data_from_frontend():
     response = jsonify(response_message)
     print(response.data) 
     return response.data
+
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():

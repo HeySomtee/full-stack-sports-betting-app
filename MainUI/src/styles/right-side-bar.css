@@ -26,12 +26,33 @@
 }
 
 .slip-holder{
-    background-color: #5f5e5e1f;
+    background-color: #5f5e5e11;
+    border-radius: 6px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.5px);
+    -webkit-backdrop-filter: blur(4.5px);
+    border: 1px solid rgba(255, 255, 255, 0.041);
+    animation: slide-in 0.2s ease-in forwards;
+}
+
+.bet-match-info {
+    animation: slide-in 0.2s ease-in forwards;
+}
+
+@keyframes slide-in{
+    from {
+        margin-left: 20vw;
+    }
+
+    to {
+        margin-left: 0vw;
+    }
 }
 
 .slip-holder-container {
     max-height: 17rem;
     overflow-y: scroll;
+    /* background-color: #144fce7a; */
 
 }
 

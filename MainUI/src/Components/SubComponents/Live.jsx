@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 library.add(fas);
 
 
-function Live({ data, setData }) {
+function Live({ data, setData, resultCount }) {
   const notify = () => toast.error("can't bet on live matches");
   const hasMatches = data.some(match => match.competition.id === 2021);
   return (
@@ -110,8 +110,12 @@ function Live({ data, setData }) {
           </div>
         ) : null
       ))
+    ) : resultCount === 0 ? (
+        <Message header={'check back tomorrow'}>
+          There are no live matches at the moment
+        </Message>
     ) : (
-        <Message header={'Oops'}>
+        <Message header={'check back later'}>
           There are no live matches now
         </Message>
     )}  

@@ -72,6 +72,8 @@
     min-width: 31.3333%; height: 100%;
     border-radius: 7px;
     margin-left: 2%;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+
 }
 
 .match-status > .live{
@@ -187,6 +189,8 @@ i {
     background-color: #52505038;
     margin-top: 5px;
     font-size: 0.8em;
+    border: 1px solid rgba(255, 255, 255, 0.055);
+
 }
 
 .match-status-display {

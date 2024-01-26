@@ -13,11 +13,13 @@ import { useLocalStorageSelections } from './Components/SubComponents/utils';
 
 function App() {
   const [data, setData] = useState([])
+  const [resultCount, setResultCount] = useState(null)
   const storageKey = 'slipSelections';
   const { localStorageItems, betSlip, addToSlip } = useLocalStorageSelections(storageKey, data);
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [payLoad, setPayLoad] = useState([])
   const accessToken = localStorage.getItem('access_token');
+
 
   useEffect(() => {
     console.log(payLoad);
@@ -34,6 +36,9 @@ function App() {
         });
 
         if (!response.ok) {
+          if (response.status === 401) {
+            window.location.href = '/login';
+          }
           throw new Error('Network response was not ok');
         }
 
@@ -43,13 +48,21 @@ function App() {
         console.error('Error fetching data:', error);
       }
     };
+    
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 15000);
+    
+    return () => clearInterval(intervalId);
 
-    fetchData();
   }, [accessToken]);
 
   const processData  = (newData) => {
-    var Matches = newData.matches
+    const Matches = newData.matches
+    const count = newData.resultSet.count 
+    console.log(count);
     setData(Matches)
+    setResultCount(count)
   } 
 
   return (
@@ -67,7 +80,7 @@ function App() {
           <Route path="/signup" element={<SignUP />} />
           {/* <br /> */}
           <Route
-            path="/"
+            path="*"
             element={
               isAuthenticated || localStorage.getItem('access_token') ? (
                 <>
@@ -80,6 +93,7 @@ function App() {
                       setData={setData}
                       localStorageItems={localStorageItems}
                       addToSlip={addToSlip}
+                      resultCount={resultCount}
                     />
                     <RightSideBar
                       data={data}

@@ -3,7 +3,7 @@ import '../styles/content-area.css'
 import Live from './SubComponents/Live';
 import Upcoming from './SubComponents/Upcoming';
 
-function ContentArea({ data, setData, localStorageItems, addToSlip  }) {
+function ContentArea({ data, setData, localStorageItems, addToSlip, resultCount }) {
 
   return (
     <div className='main-content'>
@@ -14,9 +14,9 @@ function ContentArea({ data, setData, localStorageItems, addToSlip  }) {
           <p><b>100% Welcome Bonus</b></p>
         </div>
       </div>  */}
-     <Live data={data} setData={setData}/>
+     <Live data={data} setData={setData} resultCount={resultCount} />
       <br /> 
-      <Upcoming data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip}/>
+      <Upcoming data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip} resultCount={resultCount} />
     </div>
   )
 }

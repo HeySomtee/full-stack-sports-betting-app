@@ -14,7 +14,6 @@ function BetSlip({ localStorageItems, data, setData, addToSlip}) {
     let matchingObjects = data.filter(match => itemsId.includes(match.id));
     const mappedArray = localStorageItems.map(item1 => {
     const matchingItem = matchingObjects.find(item2 => item2.id === parseInt(item1.id));
-
       if (matchingItem) {
         return {
           ...item1,
