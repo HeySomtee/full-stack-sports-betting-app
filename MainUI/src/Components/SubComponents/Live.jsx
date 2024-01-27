@@ -36,7 +36,7 @@ function Live({ data, setData, resultCount }) {
         />
         {hasMatches ? (
       data.map((match, index) => (
-        match.competition.id === 2021 ? (
+        match.status === 'IN_PLAY' ? (
           <div key={index} className="live-match-display p-2" id={`live-match-display${index}`}>
             <div className='match-status flex justify-between'>
               <span className='live'>Live</span> 
