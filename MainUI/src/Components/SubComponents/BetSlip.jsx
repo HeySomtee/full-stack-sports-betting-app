@@ -7,37 +7,49 @@ function BetSlip({ localStorageItems, data, setData, addToSlip}) {
   const [slipObjects, setSlipObjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const accessToken = localStorage.getItem('access_token');
+  const [totalOdds, setTotalOdds] = useState(0)
 
 
   useEffect(() => {
     const itemsId = localStorageItems.map(item => parseInt(item.id));
     let matchingObjects = data.filter(match => itemsId.includes(match.id));
+
+    let filteredMatches = matchingObjects.map(match => {
+      const { area, awayTeam, competition, homeTeam, id, utcDate, odds } = match;
+      return { awayTeam, homeTeam, id, utcDate, odds };
+    });
+
     const mappedArray = localStorageItems.map(item1 => {
-    const matchingItem = matchingObjects.find(item2 => item2.id === parseInt(item1.id));
+    const matchingItem = filteredMatches.find(item2 => item2.id === parseInt(item1.id));
       if (matchingItem) {
         return {
           ...item1,
           ...matchingItem
         };
       } else {
-        console.warn(`No matching item found for id ${item1.id}`);
         return item1;
       }
     });
     
     setSlipObjects(mappedArray);
-    setLoading(false);
+    setLoading(false)
 
   }, [localStorageItems, data]);
 
   useEffect(() => {
-    console.log(slipObjects);
-  }, [slipObjects]);
+    if (slipObjects.length) {
+      const allSelectedOdds = slipObjects.map(item => item.odds && item.odds[item.className])
+      if (slipObjects.length) {
+        const productOdd = allSelectedOdds.reduce((a,b) => a + b)
+        setTotalOdds(productOdd)
+      }
+    }
+  }, [slipObjects, totalOdds])
 
   const sendDataToBackend = async () => {
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/odds', {
-        key: slipObjects,
+        key: slipObjects, totalOdds
       }, {
         headers: {
           'Authorization': `Bearer ${accessToken}`,
@@ -82,7 +94,7 @@ function BetSlip({ localStorageItems, data, setData, addToSlip}) {
                   </div>
                 </div>
                 <div className='remove-slip-item'>
-                  <small className={slipItem.className} id={slipItem.id} onClick={addToSlip}>x</small>
+                  <small className={slipItem.className} id={slipItem.id} onClick={addToSlip}>X</small>
                 </div>
               </div>
               <div className='flex justify-between'>

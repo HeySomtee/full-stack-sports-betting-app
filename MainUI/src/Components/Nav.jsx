@@ -13,10 +13,10 @@ function Nav() {
         <span>Contacts</span>
       </div>
 
-      <div className='flex call-to-action justify-around'>
-        <span className='btn p-2'>ENG</span>
+      <div className='flex call-to-action justify-between'>
+        <span className='btn'><span className='text-primary-800'>₦</span>10000.00</span>
         <Link to="/login" className='btn aux'>LOG IN</Link>
-        <Link to="/signup" className='btn bg-primary-800 '>SIGN UP</Link>
+        {/* <Link to="/signup" className='btn bg-primary-800 '>SIGN UP</Link> */}
       </div>
     </div>
   );

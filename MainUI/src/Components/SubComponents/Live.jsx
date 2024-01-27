@@ -12,7 +12,7 @@ library.add(fas);
 
 function Live({ data, setData, resultCount }) {
   const notify = () => toast.error("can't bet on live matches");
-  const hasMatches = data.some(match => match.competition.id === 2021);
+  const hasMatches = data.some(match => match.status === 'IN_PLAY');
   return (
     <>
       <section className='match-display'>

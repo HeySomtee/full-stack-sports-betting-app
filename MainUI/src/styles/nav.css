@@ -17,7 +17,7 @@
 }
 
 .call-to-action {
-    width: 23vw;
+    width: 20vw;
 }
 
 .btn {
@@ -25,7 +25,13 @@
     border-radius: 5px;
 }
 
+span.btn {
+    margin-right: 1rem;
+    color: #fff;
+}
+
 .aux {
     background-color: #80808060;
     color: #fff;
 }
+

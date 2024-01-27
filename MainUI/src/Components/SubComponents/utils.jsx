@@ -19,12 +19,13 @@ export const useLocalStorageSelections = (storageKey, data) => {
     const elementId = clickedElement.id;
     const elementClass = clickedElement.className;
     const updatedItems = [...localStorageItems];
-
+    const inPlay = data.some(match => match.id === elementId && match.status === 'IN_PLAY')
+    console.log(`in play? : ${inPlay}`);
     const selectionIndex = updatedItems.findIndex(
       (item) => item.id === elementId && item.className === elementClass
     );
 
-    if (selectionIndex !== -1) {
+    if (selectionIndex !== -1 || inPlay) {
       updatedItems.splice(selectionIndex, 1);
     } else {
       if (getClassNamesById(elementId).length < 2) {

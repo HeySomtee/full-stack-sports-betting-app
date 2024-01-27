@@ -22,10 +22,6 @@ function App() {
 
 
   useEffect(() => {
-    console.log(payLoad);
-  }, [payLoad])
-
-  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('http://127.0.0.1:5000/api/data/', {
@@ -48,7 +44,7 @@ function App() {
         console.error('Error fetching data:', error);
       }
     };
-    
+
     const intervalId = setInterval(() => {
       fetchData();
     }, 15000);
@@ -60,7 +56,6 @@ function App() {
   const processData  = (newData) => {
     const Matches = newData.matches
     const count = newData.resultSet.count 
-    console.log(count);
     setData(Matches)
     setResultCount(count)
   } 
