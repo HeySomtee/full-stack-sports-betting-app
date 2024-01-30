@@ -1,5 +1,5 @@
 .right-side-bar {
-    width: 23vw;
+    width: 25vw;
     /* min-height: 50vh; */
     color:#808080;
 }
@@ -29,7 +29,6 @@
 .slip-holder{
     background-color: #5f5e5e11;
     border-radius: 6px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(4.5px);
     -webkit-backdrop-filter: blur(4.5px);
     border: 1px solid rgba(255, 255, 255, 0.041);
@@ -38,10 +37,20 @@
 }
 
 .slip-holder2 {
+    background-color: transparent;
+    border: none;
     overflow: hidden;
 }
 
-.bet-match-info {
+.bet-match-info2 {
+    background-color: #4d4d4e25;
+    border-radius: 6px;
+    backdrop-filter: blur(4.5px);
+    -webkit-backdrop-filter: blur(4.5px);
+    border: 1px solid #144fce1e;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
     /* animation: slide-in 0.2s ease-in forwards; */
 }
 
@@ -57,7 +66,7 @@
 
 .slip-holder-container {
     max-height: 17rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     /* background-color: #144fce7a; */
 
@@ -79,6 +88,10 @@
 .picked-teams {
     max-width: 80%;
     margin: 5px 0px;
+}
+
+.remove-slip-item small{
+    font-size: 0.84rem;
 }
 
 .remove-slip-item:hover {

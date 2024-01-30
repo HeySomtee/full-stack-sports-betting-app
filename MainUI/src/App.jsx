@@ -19,7 +19,8 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [payLoad, setPayLoad] = useState([])
   const accessToken = localStorage.getItem('access_token');
-  //TODO have a state for user id then call mongodb api and use it to fill my react template rather than having to fetch from my py-server
+  const [registeredBets, setRegisteredBets] = useState([])
+  //TODO have a state for user id then call mongodb api and use it to fill my react template or pass a state from local storage fro, rather than having to fetch from my py-server
 
   useEffect(() => {
     const fetchData = async () => {

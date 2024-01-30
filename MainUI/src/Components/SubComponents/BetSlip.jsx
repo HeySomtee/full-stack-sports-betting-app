@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Message from './Message';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+library.add(fas);
 
 function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageItems, registeredBets, setRegisteredBets }) {
   const [responseMessage, setResponseMessage] = useState('');
@@ -8,6 +12,8 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
   const [loading, setLoading] = useState(true);
   const accessToken = localStorage.getItem('access_token');
   const [totalOdds, setTotalOdds] = useState(0);
+  const [stakeAmount, setStakeAmount] = useState(0)
+  const [pWin, setPWin] = useState(0)
   
 
   useEffect(() => {
@@ -23,7 +29,7 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
 
     let filteredMatches = matchingObjects.map(match => {
       const { area, awayTeam, competition, homeTeam, id, utcDate, odds } = match;
-      return { awayTeam, homeTeam, id, utcDate, odds };
+      return { awayTeam, homeTeam, id, utcDate, odds, competition };
     });
 
     const mappedArray = localStorageItems.map(item1 => {
@@ -53,11 +59,19 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
       }
     }
   }, [slipObjects, totalOdds])
+  
+  const stakeValue = (event) => {
+    const stakeInput = event.target;
+    const stakeValue = parseInt(stakeInput.value);
+    setStakeAmount(stakeValue);
+    const potententialWinnings =  stakeValue * totalOdds 
+    setPWin(potententialWinnings)
+  }
 
   const sendDataToBackend = async () => {
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/odds', {
-        slip: slipObjects, totalOdds
+        slip: slipObjects, totalOdds, stakeAmount
       }, {
         headers: {
           'Authorization': `Bearer ${accessToken}`,
@@ -76,6 +90,8 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
     console.log(data);
     console.log(registeredBets);
   }, [registeredBets])
+
+
   return (
     <>
       <div style={{display: localStorageItems.length === 0 && !registeredBets.length ? 'block' : 'none'}}>
@@ -106,7 +122,7 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
                   </div>
                 </div>
                 <div className='remove-slip-item'>
-                  <small className={slipItem.className} id={slipItem.id} onClick={addToSlip}>X</small>
+                  <small className={slipItem.className} id={slipItem.id} onClick={addToSlip}>x</small>
                 </div>
               </div>
               <div className='flex justify-between'>
@@ -123,7 +139,7 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
             <h3>Total Stake</h3>
             <div className='input-div flex justify-between'>
               <span>NGN</span>
-              <input type="number" />
+              <input onChange={stakeValue} type="number" min="100" />
             </div>
           </div>
           <div className='flex justify-between'>
@@ -133,7 +149,7 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
           <br />
           <div className='flex justify-between'>
             <h3>Potential Win</h3>
-            <h3>0</h3>
+            <h3>₦{pWin ? pWin: ''}</h3>
           </div>
           <div 
             className='submit-slip'
@@ -143,7 +159,7 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
 
       </div>
 
-      <div className='slip-holder slip-holder2 p-3'
+      <div className='slip-holder slip-holder2 p-1'
         style={{display: !localStorageItems.length && registeredBets.length ? 'block' : 'none'}}
       >
         <div className='slip-holder-container'>
@@ -152,27 +168,49 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
           ) : (
             registeredBets && registeredBets.map((slipItem, index) => (
               slipItem.slip.length === 1 ? (
-                <div key={index} className='bet-match-info'>
-                <div className='flex justify-between'>
-                  <div className='w-100'>
-                    {/* <h3 className='outcome'>{slipItem.slip && `${slipItem.slip.className.charAt(0).toUpperCase()}${slipItem.slip.className.slice(1)}`}</h3> */}
-                    <div className='picked-teams flex'>
-                      <small className='live'>Live </small>
-                      <small className='teams'>
-                        {slipItem.slip.awayTeam && slipItem.slip.awayTeam.name} vs {slipItem.slip.awayTeam && slipItem.slip.homeTeam.name}
-                      </small>
+                <div key={index} className='bet-match-info2'>
+                  <div className='flex justify-between'>
+                    <div className='w-100'>
+                      <h3 className='outcome'>{slipItem.slip && `${slipItem.slip[0].className.charAt(0).toUpperCase()}${slipItem.slip[0].className.slice(1)}`}</h3>
+                      <div className='picked-teams flex'>
+                        <small className='live'>Live </small>
+                        <small className='teams'>
+                          {slipItem.slip && slipItem.slip[0].awayTeam.name} vs {slipItem && slipItem.slip[0].homeTeam.name}
+                        </small>
+                      </div>
+                    </div>
+                    <div className='remove-slip-item'>
+                      <small className={slipItem.slip.className}>1x2</small>
                     </div>
                   </div>
-                  {/* <div className='remove-slip-item'>
-                    <small className={slipItem.slip.className} id={slipItem.slip.id} onClick={addToSlip}>X</small>
-                  </div> */}
+                  <div className='flex justify-between'>
+                    <small className='mkt'>stake: {slipItem && slipItem.stakeAmount}</small>
+                    <h3 className='odd'>{slipItem && slipItem.totalOdds}</h3>
+                  </div>
+                  {/* <div className='hr'></div> */}
                 </div>
-                <div className='flex justify-between'>
-                  {/* <small className='mkt'>{slipItem.slip.competition && slipItem.competition.name}</small> */}
-                  <h3 className='odd'>{slipItem.slip.odds && slipItem.slip.odds[slipItem.slip.className]}</h3>
+              ) : slipItem.slip.length > 1 ? (
+                <div key={index} className='bet-match-info2'>
+                  <div className='flex justify-between'>
+                    <div className='w-100'>
+                      <h3 className='outcome'>Multiple</h3>
+                      <div className='picked-teams flex'>
+                        <small className='live'>Live </small>
+                        <small className='teams'>
+                          {slipItem.slip && slipItem.slip[0].awayTeam.name} vs {slipItem && slipItem.slip[0].homeTeam.name}
+                        </small>
+                      </div>
+                    </div>
+                    <div className='remove-slip-item'>
+                      <small className={slipItem.slip.className}><FontAwesomeIcon icon="fa-angle-down" /></small>
+                    </div>
+                  </div>
+                  <div className='flex justify-between'>
+                    <small className='mkt'>stake: {slipItem && slipItem.stakeAmount}</small>
+                    <h3 className='odd'>Total odds: {slipItem && slipItem.totalOdds}</h3>
+                  </div>
+                  {/* <div className='hr'></div> */}
                 </div>
-                <div className='hr'></div>
-              </div>
               ) : null
             ))
           )}

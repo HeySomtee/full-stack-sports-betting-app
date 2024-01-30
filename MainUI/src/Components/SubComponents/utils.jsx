@@ -25,7 +25,8 @@ export const useLocalStorageSelections = (storageKey, data) => {
     if (selectionIndex !== -1) {
       updatedItems.splice(selectionIndex, 1);
     } else {
-      if (getClassNamesById(elementId).length < 2) {
+      if (getClassNamesById(elementId).length < 1 ) {
+        // TODO make so it can be 2 only if one is draw
         updatedItems.push({ id: elementId, className: elementClass});
       }
     }
