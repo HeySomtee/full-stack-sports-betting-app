@@ -2,13 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Message from './Message';
 import axios from 'axios';
 
-function BetSlip({ localStorageItems, data, setData, addToSlip}) {
+function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageItems, registeredBets, setRegisteredBets }) {
   const [responseMessage, setResponseMessage] = useState('');
   const [slipObjects, setSlipObjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const accessToken = localStorage.getItem('access_token');
-  const [totalOdds, setTotalOdds] = useState(0)
+  const [totalOdds, setTotalOdds] = useState(0);
+  
 
+  useEffect(() => {
+    localStorageItems = localStorageItems.filter(obj2 =>
+      data.some(obj1 => obj1.id === parseInt(obj2.id))
+    );
+
+  }, [data, localStorageItems])
 
   useEffect(() => {
     const itemsId = localStorageItems.map(item => parseInt(item.id));
@@ -40,7 +47,8 @@ function BetSlip({ localStorageItems, data, setData, addToSlip}) {
     if (slipObjects.length) {
       const allSelectedOdds = slipObjects.map(item => item.odds && item.odds[item.className])
       if (slipObjects.length) {
-        const productOdd = allSelectedOdds.reduce((a,b) => a + b)
+        let productOdd = allSelectedOdds.reduce((a,b) => a + b)
+        productOdd ? productOdd = parseFloat(productOdd.toFixed(2)) : ''
         setTotalOdds(productOdd)
       }
     }
@@ -49,7 +57,7 @@ function BetSlip({ localStorageItems, data, setData, addToSlip}) {
   const sendDataToBackend = async () => {
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/odds', {
-        key: slipObjects, totalOdds
+        slip: slipObjects, totalOdds
       }, {
         headers: {
           'Authorization': `Bearer ${accessToken}`,
@@ -57,16 +65,20 @@ function BetSlip({ localStorageItems, data, setData, addToSlip}) {
         },
       });
       const responseData = response.data;
-      setResponseMessage('Response from Backend: ' + responseData.message);
-      console.log(responseMessage);
+      setRegisteredBets(responseData.user_bets);
+      setLocalStorageItems([])
     } catch (error) {
       console.error('Error sending data to backend:', error.message);
     }
   };
 
+  useEffect(() => {
+    console.log(data);
+    console.log(registeredBets);
+  }, [registeredBets])
   return (
     <>
-      <div style={{display: localStorageItems.length === 0 ? 'block' : 'none'}}>
+      <div style={{display: localStorageItems.length === 0 && !registeredBets.length ? 'block' : 'none'}}>
         <Message
           header="You have no open bets"
         >
@@ -75,7 +87,7 @@ function BetSlip({ localStorageItems, data, setData, addToSlip}) {
       </div>
 
       <div className='slip-holder p-3'
-        style={{display: localStorageItems.length === 0 ? 'none' : 'block'}}
+        style={{display: localStorageItems.length && !registeredBets.length ? 'block' : 'none'}}
       >
         <div className='slip-holder-container'>
         {loading ? (
@@ -116,7 +128,7 @@ function BetSlip({ localStorageItems, data, setData, addToSlip}) {
           </div>
           <div className='flex justify-between'>
             <h3>Odds</h3>
-            <h3>10.69</h3>
+            <h3>{totalOdds}</h3>
           </div>
           <br />
           <div className='flex justify-between'>
@@ -129,6 +141,42 @@ function BetSlip({ localStorageItems, data, setData, addToSlip}) {
           >Place Bet</div>
         </div>
 
+      </div>
+
+      <div className='slip-holder slip-holder2 p-3'
+        style={{display: !localStorageItems.length && registeredBets.length ? 'block' : 'none'}}
+      >
+        <div className='slip-holder-container'>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            registeredBets && registeredBets.map((slipItem, index) => (
+              slipItem.slip.length === 1 ? (
+                <div key={index} className='bet-match-info'>
+                <div className='flex justify-between'>
+                  <div className='w-100'>
+                    {/* <h3 className='outcome'>{slipItem.slip && `${slipItem.slip.className.charAt(0).toUpperCase()}${slipItem.slip.className.slice(1)}`}</h3> */}
+                    <div className='picked-teams flex'>
+                      <small className='live'>Live </small>
+                      <small className='teams'>
+                        {slipItem.slip.awayTeam && slipItem.slip.awayTeam.name} vs {slipItem.slip.awayTeam && slipItem.slip.homeTeam.name}
+                      </small>
+                    </div>
+                  </div>
+                  {/* <div className='remove-slip-item'>
+                    <small className={slipItem.slip.className} id={slipItem.slip.id} onClick={addToSlip}>X</small>
+                  </div> */}
+                </div>
+                <div className='flex justify-between'>
+                  {/* <small className='mkt'>{slipItem.slip.competition && slipItem.competition.name}</small> */}
+                  <h3 className='odd'>{slipItem.slip.odds && slipItem.slip.odds[slipItem.slip.className]}</h3>
+                </div>
+                <div className='hr'></div>
+              </div>
+              ) : null
+            ))
+          )}
+        </div> 
       </div>
     </>
   );

@@ -4,7 +4,6 @@ export const useLocalStorageSelections = (storageKey, data) => {
   const [localStorageItems, setLocalStorageItems] = useState(
     JSON.parse(localStorage.getItem(storageKey)) || []
   );
-  const [betSlip, setBetSlip] = useState([])
 
   // useEffect(() => {
   //   console.log(data);
@@ -19,23 +18,19 @@ export const useLocalStorageSelections = (storageKey, data) => {
     const elementId = clickedElement.id;
     const elementClass = clickedElement.className;
     const updatedItems = [...localStorageItems];
-    const inPlay = data.some(match => match.id === elementId && match.status === 'IN_PLAY')
-    console.log(`in play? : ${inPlay}`);
     const selectionIndex = updatedItems.findIndex(
       (item) => item.id === elementId && item.className === elementClass
     );
 
-    if (selectionIndex !== -1 || inPlay) {
+    if (selectionIndex !== -1) {
       updatedItems.splice(selectionIndex, 1);
     } else {
       if (getClassNamesById(elementId).length < 2) {
         updatedItems.push({ id: elementId, className: elementClass});
       }
     }
-
+    
     setLocalStorageItems(updatedItems);
-    // console.log(`${storageKey}:`);
-    // console.log(updatedItems);
   };
 
   const getClassNamesById = (id) => {
@@ -48,5 +43,5 @@ export const useLocalStorageSelections = (storageKey, data) => {
     return classNames;
   };
 
-  return { localStorageItems, addToSlip };
+  return { localStorageItems, setLocalStorageItems, addToSlip };
 };

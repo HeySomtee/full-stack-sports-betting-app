@@ -4,7 +4,7 @@ import '../styles/right-side-bar.css';
 import BetSlip from './SubComponents/BetSlip';
 import BetHistory from './SubComponents/BetHistory';
 
-function RightSideBar({ data, setData, localStorageItems, addToSlip}) {
+function RightSideBar({ data, setData, localStorageItems, addToSlip, setLocalStorageItems, registeredBets, setRegisteredBets}) {
   const [slipCount, setSlipCount] = useState(0);
   const [betCount, setBetCount] = useState(0);
   const [isActive, setIsActive] = useState('bet-slip');
@@ -40,8 +40,25 @@ function RightSideBar({ data, setData, localStorageItems, addToSlip}) {
 
         <div className='right-side-content'>
           <Routes>
-            <Route path="/" element={<BetSlip data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip} />} />
-            <Route path="/bet-slip" element={<BetSlip data={data} setData={setData} localStorageItems={localStorageItems} addToSlip={addToSlip}/>} />
+            <Route path="/" element={<BetSlip 
+              data={data} 
+              setData={setData} 
+              localStorageItems={localStorageItems} 
+              setLocalStorageItems={setLocalStorageItems} 
+              addToSlip={addToSlip}
+              registeredBets={registeredBets}
+              setRegisteredBets={setRegisteredBets}
+              />} />
+
+            <Route path="/bet-slip" element={<BetSlip 
+              data={data} 
+              setData={setData} 
+              localStorageItems={localStorageItems} 
+              setLocalStorageItems={setLocalStorageItems} 
+              addToSlip={addToSlip}
+              registeredBets={registeredBets}
+              setRegisteredBets={setRegisteredBets}
+            />} />
             <Route path="/bet-history" element={<BetHistory />} />
           </Routes>
         </div>

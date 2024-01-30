@@ -15,11 +15,11 @@ function App() {
   const [data, setData] = useState([])
   const [resultCount, setResultCount] = useState(null)
   const storageKey = 'slipSelections';
-  const { localStorageItems, betSlip, addToSlip } = useLocalStorageSelections(storageKey, data);
+  const { localStorageItems, setLocalStorageItems, betSlip, addToSlip } = useLocalStorageSelections(storageKey, data);
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [payLoad, setPayLoad] = useState([])
   const accessToken = localStorage.getItem('access_token');
-
+  //TODO have a state for user id then call mongodb api and use it to fill my react template rather than having to fetch from my py-server
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,6 +59,7 @@ function App() {
     setData(Matches)
     setResultCount(count)
   } 
+  
 
   return (
     <>
@@ -89,13 +90,17 @@ function App() {
                       localStorageItems={localStorageItems}
                       addToSlip={addToSlip}
                       resultCount={resultCount}
+                      setRegisteredBets={setRegisteredBets}
                     />
                     <RightSideBar
                       data={data}
                       setData={setData}
                       localStorageItems={localStorageItems}
+                      setLocalStorageItems={setLocalStorageItems}
                       addToSlip={addToSlip}
                       betSlip={betSlip}
+                      registeredBets={registeredBets}
+                      setRegisteredBets={setRegisteredBets}
                     />
                   </div>
                 </>

@@ -9,9 +9,9 @@ import { useLocalStorageSelections } from './utils';
 
 library.add(fas);
 
-function Upcoming({ data, setData, localStorageItems, addToSlip, resultCount }) {
+function Upcoming({ data, setData, localStorageItems, addToSlip, resultCount, setRegisteredBets}) {
   
-  const nHasMatches = data.some(match => match.competition.id && match.competition.id !== 2021);
+  const nHasMatches = data.some(match => match.status && match.status !== 'IN_PLAY');
 
   return (
     <>
@@ -47,7 +47,7 @@ function Upcoming({ data, setData, localStorageItems, addToSlip, resultCount }) 
             {
               nHasMatches ? (
                 data.map((match, index) => (
-                  match.competition.id !== 2021 ? (
+                  match.status !== 'IN_PLAY' ? (
                   <div key={index} className='upc-fixtures-display p-3 flex justify-between'>
                     <div className='upc-match-info flex'>
                       <div>

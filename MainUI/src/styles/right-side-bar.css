@@ -4,6 +4,7 @@
     color:#808080;
 }
 
+
 .hr {
     width: 100%;
     background-color: #52505048;
@@ -32,11 +33,16 @@
     backdrop-filter: blur(4.5px);
     -webkit-backdrop-filter: blur(4.5px);
     border: 1px solid rgba(255, 255, 255, 0.041);
-    animation: slide-in 0.2s ease-in forwards;
+    /* animation: slide-in 0.2s ease-in forwards; */
+    overflow: hidden;
+}
+
+.slip-holder2 {
+    overflow: hidden;
 }
 
 .bet-match-info {
-    animation: slide-in 0.2s ease-in forwards;
+    /* animation: slide-in 0.2s ease-in forwards; */
 }
 
 @keyframes slide-in{
@@ -52,6 +58,7 @@
 .slip-holder-container {
     max-height: 17rem;
     overflow-y: scroll;
+    overflow-x: hidden;
     /* background-color: #144fce7a; */
 
 }

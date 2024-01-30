@@ -24,9 +24,24 @@ client = MongoClient(mongo_uri)
 database_name = "Project_db"
 db = client[database_name]
 
-# Access a specific collection within the database
 collection_name = "sportee_db"
 collection = db[collection_name]
+
+user_schema = {
+    'useremail': {
+        'type': str,
+        'required': True,
+        'unique': True,
+    },
+    'password': {
+        'type': str,
+        'required': True,
+    },
+    'bets': {
+        'type': list,
+        'default': [],
+    },
+}
 
 
 @app.route('/api/data/')
@@ -50,18 +65,19 @@ def get_api_data():
 
 @app.route('/api/odds', methods=['POST'])
 @jwt_required()
-def receive_data_from_frontend():
-    data = request.json 
-    print(data)
-    data_to_insert = data
-    result = collection.insert_one(data_to_insert)
-
-    # Print the ID of the inserted document
-    print(f"Inserted document ID: {result.inserted_id}")
-    response_message = {"res" : "Bet slip created"} 
-    response = jsonify(response_message)
-    print(response.data) 
-    return response.data
+def place_bet():
+    user_email = get_jwt_identity()
+    new_bet = request.json 
+    collection.update_one (
+        {"useremail": user_email},
+        {"$push": {"bets": new_bet}}
+    )
+    user = collection.find_one({"useremail": user_email})
+    if user:
+        user_bets = user.get('bets', [])
+        return jsonify({"user_bets": user_bets})
+    else:
+        return jsonify({"error": f"User with email {user_email} not found"}), 404 
 
 
 
@@ -78,8 +94,9 @@ def signup():
             print(response.data) 
             return response.data, 222
 
+        #TODO hash/salt password
         hashed_password = password  # generate_password_hash(password, method='sha256')
-        user_data = {'useremail': user_email, 'password': hashed_password}
+        user_data = {'useremail': user_email, 'password': hashed_password, 'bets': []}
         collection.insert_one(user_data)
         response_message = {'res': 'User registered successfully'}
         response = jsonify(response_message)
