@@ -54,15 +54,12 @@
     /* animation: slide-in 0.2s ease-in forwards; */
 }
 
-<<<<<<< HEAD
-=======
 .bg {
     border: 3px solid #ce1a1449;
     border-radius: 6px;
 
 }
 
->>>>>>> 6b0f7db298a377873f378f09acc67c77d6dc9026
 @keyframes slide-in{
     from {
         margin-left: 20vw;
@@ -74,11 +71,7 @@
 }
 
 .slip-holder-container {
-<<<<<<< HEAD
-    max-height: 17rem;
-=======
     max-height: 70vh;
->>>>>>> 6b0f7db298a377873f378f09acc67c77d6dc9026
     overflow-y: auto;
     overflow-x: hidden;
     /* background-color: #144fce7a; */
