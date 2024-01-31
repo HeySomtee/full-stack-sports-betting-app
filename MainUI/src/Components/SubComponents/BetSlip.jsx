@@ -191,6 +191,25 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
                 </div>
               ) : slipItem.slip.length > 1 ? (
                 <div key={index} className='bet-match-info2'>
+                  <div className='flex justify-between'>
+                    <div className='w-100'>
+                      <h3 className='outcome'>Multiple</h3>
+                      <div className='picked-teams flex'>
+                        <small className='live'>Live </small>
+                        <small className='teams'>
+                          {slipItem.slip && slipItem.slip[0].awayTeam.name} vs {slipItem && slipItem.slip[0].homeTeam.name}
+                        </small>
+                      </div>
+                    </div>
+                    <div className='remove-slip-item'>
+                      <small className={slipItem.slip.className}><FontAwesomeIcon icon="fa-angle-down" /></small>
+                    </div>
+                  </div>
+                  <div className='flex justify-between'>
+                    <small className='mkt'>stake: {slipItem && slipItem.stakeAmount}</small>
+                    <h3 className='odd'>Total odds: {slipItem && slipItem.totalOdds}</h3>
+                  </div>
+                  {/* <div className='hr'></div> */}
                   <div className='bg p-2'>
                     <div className='flex justify-between'>
                       <div className='w-100'>
