@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
+.main-content {
+    /* background-color: #ffffff2f; */
+    color: #808080;
+    width: 61vw;
+    height:100vh;
+    overflow-y: scroll;
+
+}
+
+.main-content::-webkit-scrollbar {
+    display: block;
+    width: 2px;
+    /* transition: width 2s ease-in-out; */
+}
+
+.upcoming-match-display::-webkit-scrollbar {
+    width: 2px;
+}
+
+.poster {
+    width: 100%;
+    height: 42vh;
+    border-radius: 5px;
+    background-image: url('../assets/hero-img2.avif');
+    background-position: center;
+}
+
+
+.poster-text {
+    height: 100%;
+    width: 45%;
+    font-size: 1.7em;
+    display: grid;
+    place-content: center;
+}
+
+.match-display {
+    width: 100%;
+    overflow-y: auto;
+}
+
+.hero-image-div {
+    height: 99%;
+    /* width: 23%; */
+}
+
+.hero-image {
+    height: 100%;
+    width: 100%;
+}
+
+.live-match-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    
+}
+
+.live-match-container::-webkit-scrollbar {
+   height: 4px;
+}
+
+
+.live-match-display {
+    background: #5f5e5e1f;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 0px solid rgba(255, 255, 255, 0.3);
+    min-width: 31.3333%; height: 100%;
+    border-radius: 7px;
+    margin-left: 2%;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+
+}
+
+.match-status > .live{
+    color: #fff;
+    padding: 0px 10px;
+    background-color: #d61a1a;
+    border-radius: 3px;
+}
+
+i {
+    font-family: 'Lemon', serif;
+}
+
+.match-teams{
+    height: 120px;
+}
+
+
+.match-teams div {
+    height: 100%;
+    display: grid;
+    place-content: center;
+    /* background-color: black; */
+}
+
+.match-teams img {
+    height: 80px;
+    width: 80px;
+}
+
+.range-outer {
+    width: 100%;
+    height: 3px;
+    background-color: #52505048;
+}
+.range-inner {
+    width: 50%;
+    height: 3px;
+    background-color: #d61a1a;
+    border-right: solid 5px #01080f;
+}
+
+.team-scores-text{
+    width: 100%;
+    /* background-color: #808080; */
+}
+
+.odds-container {
+    width: 100%;
+    height: 40px;
+}
+
+.odds-container > div{
+    color: #fff;
+    background-color: #52505048;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+}
+
+.odds-container small {
+    pointer-events: none;
+}
+
+.upcoming-match-display {
+    width: 100%;
+}
+
+.upc-header {
+    width: 100%;
+    background-color: #52505069;
+    font-size: small;
+    border-radius: 6px;
+}
+
+.upc-header > div {
+    display: flex;
+}
+
+.upc-match-info {
+    width: 15%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.upc-odds-header {
+    width: 60%;
+    place-content: center;
+    justify-content: center;
+}
+
+.inner-upc-odds-header {
+    width: 50%;
+    place-content: center;
+    justify-content: space-around;
+
+}
+
+.markets {
+    width: 7%;
+    place-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mkt-img {
+    padding: 13px;
+}
+
+.upc-fixtures-display {
+    width: 100%;
+    background-color: #52505038;
+    margin-top: 5px;
+    font-size: 0.8em;
+    border: 1px solid rgba(255, 255, 255, 0.055);
+
+}
+
+.match-status-display {
+    height: 30px;
+    width: 30px;
+    font-size: 1.5em;
+}
+
+.upc-odds-display{
+    display: flex;
+    justify-content: space-between;
+}
+
+.upc-odds-display > div{
+    background-color: #52505069;
+    display: grid;
+    place-content: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.v-center {
+    align-items: center;
+    justify-content: center;
+}
+
+.upc-home-team > img, .upc-away-team  img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #52505038;
+}
+
+.upc-home-team, .upc-away-team {
+    align-items: center;
+    justify-content: space-between;
+    width: 20%;
+    
+}
+
+.selected-match {
+    background-color: #144fce;
+}

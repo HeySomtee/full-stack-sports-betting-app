@@ -1,0 +1,143 @@
+.right-side-bar {
+    width: 25vw;
+    /* min-height: 50vh; */
+    color:#808080;
+}
+
+
+.hr {
+    width: 100%;
+    background-color: #52505048;
+    height: 2px;
+    margin: 5px;
+}
+
+.right-side-bar-header {
+    width: 55%;
+    font-size: 0.9em;
+}
+
+.right-side-bar-header > span{
+    cursor: pointer;
+}
+
+.active{
+    font-weight: 600;
+    color: #fff;
+}
+
+.slip-holder{
+    background-color: #5f5e5e11;
+    border-radius: 6px;
+    backdrop-filter: blur(4.5px);
+    -webkit-backdrop-filter: blur(4.5px);
+    border: 1px solid rgba(255, 255, 255, 0.041);
+    /* animation: slide-in 0.2s ease-in forwards; */
+    overflow: hidden;
+}
+
+.slip-holder2 {
+    background-color: transparent;
+    border: none;
+    overflow: hidden;
+}
+
+.bet-match-info2 {
+    background-color: #4d4d4e25;
+    border-radius: 6px;
+    backdrop-filter: blur(4.5px);
+    -webkit-backdrop-filter: blur(4.5px);
+    border: 1px solid #144fce1e;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+    /* animation: slide-in 0.2s ease-in forwards; */
+}
+
+@keyframes slide-in{
+    from {
+        margin-left: 20vw;
+    }
+
+    to {
+        margin-left: 0vw;
+    }
+}
+
+.slip-holder-container {
+    max-height: 17rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* background-color: #144fce7a; */
+
+}
+
+.slip-holder-container::-webkit-scrollbar{
+    display: none;
+}
+
+.right-side-content h3{
+    color: #fff;
+    font-size: 0.8em;
+}
+
+.w-100 {
+    width: 97%;
+}
+
+.picked-teams {
+    max-width: 80%;
+    margin: 5px 0px;
+}
+
+.remove-slip-item small{
+    font-size: 0.84rem;
+}
+
+.remove-slip-item:hover {
+    cursor: pointer;
+    color: #fff;
+    /* margin-right: 1rem; */
+}
+
+
+
+.picked-teams .teams{
+    max-width: 80%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-left: 7px;
+}
+
+.live {
+    background-color: #d61a1a;
+    color: #fff;
+    padding: 0px 5px;
+    border-radius: 2px;
+    
+    /* display: none; */
+}
+
+input {
+    background-color: transparent;
+    border: 1px solid #808080;
+    width: 100px;
+    color: #fff;
+    font-weight: 400;
+}
+
+.input-div {
+    width: 50%;
+}
+
+.submit-slip {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px;
+    background-color: #144fce;
+    color: #fff;
+}
+
