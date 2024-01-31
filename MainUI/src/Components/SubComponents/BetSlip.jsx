@@ -210,51 +210,6 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
                     <h3 className='odd'>Total odds: {slipItem && slipItem.totalOdds}</h3>
                   </div>
                   {/* <div className='hr'></div> */}
-                  <div className='bg p-2'>
-                    <div className='flex justify-between'>
-                      <div className='w-100'>
-                        <h3 className='outcome'>Multiple</h3>
-                        <div className='picked-teams flex'>
-                          <small className='live'>Live </small>
-                          <small className='teams'>
-                            {slipItem.slip && slipItem.slip[0].awayTeam.name} vs {slipItem && slipItem.slip[0].homeTeam.name}
-                          </small>
-                        </div>
-                      </div>
-                      <div className='remove-slip-item'>
-                        <small className={slipItem.slip.className}><FontAwesomeIcon icon="fa-angle-down" /></small>
-                      </div>
-                    </div>
-                    <div className='flex justify-between'>
-                      <small className='mkt'>stake: {slipItem && slipItem.stakeAmount}</small>
-                      <h3 className='odd'>Total odds: {slipItem && slipItem.totalOdds}</h3>
-                    </div>
-                  </div>
-                   
-                  {slipItem.slip.map((item, indexx) => (
-                    <div style={{display: 'none'}} key={indexx}>
-                      <br />
-                      <div className='flex justify-between'>
-                        <div className='w-100'>
-                          <h3 className='outcome'>{`${item.className.charAt(0).toUpperCase()}${item.className.slice(1)}`}</h3>
-                          <div className='picked-teams flex'>
-                            <small className='live'>Live </small>
-                            <small className='teams'>
-                              {item.awayTeam && item.awayTeam.name} vs {item.awayTeam && item.homeTeam.name}
-                            </small>
-                          </div>
-                        </div>
-                        <div className='remove-slip-item'>
-                          {/* <small className={item.className}>x</small> */}
-                        </div>
-                      </div>
-                      <div className='flex justify-between'>
-                        <small className='mkt'>{item.competition && item.competition.name}</small>
-                        <h3 className='odd'>{item.odds && item.odds[item.className]}</h3>
-                      </div>
-                      <div className='hr'></div>
-                    </div>
-                  ))}
                 </div>
               ) : null
             ))
