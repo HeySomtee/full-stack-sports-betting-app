@@ -9,6 +9,7 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 from datetime import timedelta
 from datetime import datetime
 import jwt
+from uuid import uuid4
 
 
 app = Flask(__name__)
@@ -68,10 +69,16 @@ def get_api_data():
 def place_bet():
     user_email = get_jwt_identity()
     new_bet = request.json 
+
+    # Generate a unique ID for the new bet
+    bet_id = str(uuid4())
+    new_bet['id'] = bet_id
+
     collection.update_one (
         {"useremail": user_email},
         {"$push": {"bets": new_bet}}
     )
+
     user = collection.find_one({"useremail": user_email})
     if user:
         user_bets = user.get('bets', [])
@@ -96,7 +103,7 @@ def signup():
 
         #TODO hash/salt password
         hashed_password = password  # generate_password_hash(password, method='sha256')
-        user_data = {'useremail': user_email, 'password': hashed_password, 'bets': []}
+        user_data = {'useremail': user_email, 'password': hashed_password, 'balance': 500000, 'bets': [], 'history': []}
         collection.insert_one(user_data)
         response_message = {'res': 'User registered successfully'}
         response = jsonify(response_message)

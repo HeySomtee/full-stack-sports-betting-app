@@ -28,8 +28,8 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
     let matchingObjects = data.filter(match => itemsId.includes(match.id));
 
     let filteredMatches = matchingObjects.map(match => {
-      const { area, awayTeam, competition, homeTeam, id, utcDate, odds } = match;
-      return { awayTeam, homeTeam, id, utcDate, odds, competition };
+      const { status, awayTeam, competition, homeTeam, id, score, utcDate, odds } = match;
+      return { status, awayTeam, homeTeam, id, utcDate, odds, score, competition };
     });
 
     const mappedArray = localStorageItems.map(item1 => {
@@ -90,6 +90,20 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
     console.log(data);
     console.log(registeredBets);
   }, [registeredBets])
+
+  useEffect(() => {
+    if (registeredBets.length) {
+      const slipState = registeredBets.map(item => {
+        const isFinished = item.slip.every(item2 => item2.status === 'FINISHED');
+        const betEnter = item.slip.every(item2 => isFinished && item2.score && item2.className === item2.score.winner);
+      
+        return { id: item.id, isFinished, betEnter };
+      });
+      console.log(slipState);
+    }
+
+  }, [registeredBets, data])
+  
 
 
   return (
