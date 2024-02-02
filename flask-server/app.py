@@ -15,7 +15,7 @@ from uuid import uuid4
 app = Flask(__name__)
 CORS(app)
 app.config['JWT_SECRET_KEY'] = '0xC1B503B6c0D110f0cf6B727D109FC575B4Ad6D79' 
-app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(minutes=30) 
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(minutes=60) 
 
 jwt = JWTManager(app)
 
@@ -53,7 +53,7 @@ def get_api_data():
     
     url = "http://api.football-data.org/v4/matches"
     headers = {
-        'X-Auth-Token': '73fdb77b3269470da61ca7234e7da2b8',
+        'X-Auth-Token': '9377f5d5f1e14826a93b303ef58efc92',
         "X-Unfold-Goals": "true",
     }
     params = {
@@ -118,7 +118,7 @@ def login():
         
         existing_user = collection.find_one({'useremail': user_email, 'password': password})
         if existing_user:
-            access_token = create_access_token(identity=user_email, expires_delta=timedelta(minutes=30))
+            access_token = create_access_token(identity=user_email, expires_delta=timedelta(minutes=60))
             print(access_token)
             response_message = {'res': 'User login successful', 'access_token': access_token}
             response = jsonify(response_message)
