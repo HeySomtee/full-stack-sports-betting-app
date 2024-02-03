@@ -12,7 +12,7 @@ library.add(fas);
 
 function Live({ data, setData, resultCount }) {
   const notify = () => toast.error("can't bet on live matches");
-  const hasMatches = data.some(match => match.status === 'IN_PLAY');
+  const hasMatches = data.some(match => match.status === 'IN_PLAY' || match.status === 'PAUSED' );
   return (
     <>
       <section className='match-display'>
@@ -36,10 +36,10 @@ function Live({ data, setData, resultCount }) {
         />
         {hasMatches ? (
       data.map((match, index) => (
-        match.status === 'IN_PLAY' ? (
+        match.status === 'IN_PLAY' || match.status === 'PAUSED' ? (
           <div key={index} className="live-match-display p-2" id={`live-match-display${index}`}>
             <div className='match-status flex justify-between'>
-              <span className='live'>Live</span> 
+              <span className='live'>{match.status === 'PAUSED' ? 'Break' : 'Live'}</span> 
               <span><FontAwesomeIcon icon={faStar} /></span>
             </div>
             <div className='match-teams flex justify-between'>

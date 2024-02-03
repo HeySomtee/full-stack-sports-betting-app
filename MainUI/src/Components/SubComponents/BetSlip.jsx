@@ -6,8 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 library.add(fas);
 
-function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageItems, registeredBets, setRegisteredBets }) {
-  const [responseMessage, setResponseMessage] = useState('');
+function BetSlip({ localStorageItems, data, betDate, setData, addToSlip, setLocalStorageItems, registeredBets, setRegisteredBets }) {
   const [slipObjects, setSlipObjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const accessToken = localStorage.getItem('access_token');
@@ -28,8 +27,8 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
     let matchingObjects = data.filter(match => itemsId.includes(match.id));
 
     let filteredMatches = matchingObjects.map(match => {
-      const { status, awayTeam, competition, homeTeam, id, score, utcDate, odds } = match;
-      return { status, awayTeam, homeTeam, id, utcDate, odds, score, competition };
+      const { status, awayTeam, competition, homeTeam, id, score, utcDate, odds, date } = match;
+      return { status, awayTeam, homeTeam, id, utcDate, odds, score, competition, date };
     });
 
     const mappedArray = localStorageItems.map(item1 => {
@@ -68,10 +67,14 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
     setPWin(potententialWinnings)
   }
 
+  useEffect(() => {
+    console.log(betDate);
+  }, [betDate])
+
   const sendDataToBackend = async () => {
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/odds', {
-        slip: slipObjects, totalOdds, stakeAmount
+        slip: slipObjects, totalOdds, stakeAmount, betDate
       }, {
         headers: {
           'Authorization': `Bearer ${accessToken}`,
@@ -87,7 +90,7 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
   };
 
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
     console.log(registeredBets);
   }, [registeredBets])
 
@@ -96,10 +99,9 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
       const slipState = registeredBets.map(item => {
         const isFinished = item.slip.every(item2 => item2.status === 'FINISHED');
         const betEnter = item.slip.every(item2 => isFinished && item2.score && item2.className === item2.score.winner);
-      
         return { id: item.id, isFinished, betEnter };
       });
-      console.log(slipState);
+      // console.log(slipState);
     }
 
   }, [registeredBets, data])
@@ -117,7 +119,7 @@ function BetSlip({ localStorageItems, data, setData, addToSlip, setLocalStorageI
       </div>
 
       <div className='slip-holder p-3'
-        style={{display: localStorageItems.length && !registeredBets.length ? 'block' : 'none'}}
+        style={{display: localStorageItems.length ? 'block' : 'none'}}
       >
         <div className='slip-holder-container'>
         {loading ? (

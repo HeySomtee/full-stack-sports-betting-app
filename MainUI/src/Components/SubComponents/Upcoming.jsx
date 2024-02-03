@@ -47,7 +47,7 @@ function Upcoming({ data, setData, localStorageItems, addToSlip, resultCount, se
             {
               nHasMatches ? (
                 data.map((match, index) => (
-                  match.status !== 'IN_PLAY' ? (
+                  match.status !== 'IN_PLAY' && match.status !== 'PAUSED' ? (
                   <div key={index} className='upc-fixtures-display p-3 flex justify-between'>
                     <div className='upc-match-info flex'>
                       <div>

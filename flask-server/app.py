@@ -28,22 +28,6 @@ db = client[database_name]
 collection_name = "sportee_db"
 collection = db[collection_name]
 
-user_schema = {
-    'useremail': {
-        'type': str,
-        'required': True,
-        'unique': True,
-    },
-    'password': {
-        'type': str,
-        'required': True,
-    },
-    'bets': {
-        'type': list,
-        'default': [],
-    },
-}
-
 
 @app.route('/api/data/')
 @jwt_required()
@@ -63,6 +47,7 @@ def get_api_data():
     response = requests.get(url, headers=headers)
     data = response.json()
     return jsonify(data)
+
 
 @app.route('/api/odds', methods=['POST'])
 @jwt_required()
@@ -84,8 +69,7 @@ def place_bet():
         user_bets = user.get('bets', [])
         return jsonify({"user_bets": user_bets})
     else:
-        return jsonify({"error": f"User with email {user_email} not found"}), 404 
-
+        return jsonify({"error": f"User with email {user_email} not found"}), 404  
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -129,9 +113,64 @@ def login():
             response = jsonify(response_message)
             return response, 222
             
-            
+@app.route('/user/bets', methods=['GET', 'POST'])
+@jwt_required()
+def user_bets():
+    user_email = get_jwt_identity()
+    user = collection.find_one({"useremail": user_email})
+    if user:
+        user_bets = user.get('bets', [])
+        return jsonify({"user_bets": user_bets})
+    else:
+        return jsonify({"error": f"User with email {user_email} not found"}), 404 
         
         
+# @app.route('/update/bets', methods=['POST', 'GET'])
+# @jwt_required()
+def check_validated_bets():
+    # user_email = get_jwt_identity()
+    user_email = 'ilosomto2000@gmail.com'
+    user = collection.find_one({"useremail": user_email})
+    user_bets = user.get('bets', [])
+    
+    slipState = []
+    for item in user_bets:
+        bet_date = item['betDate']
+
+        url = "http://api.football-data.org/v4/matches"
+        headers = {
+            'X-Auth-Token': '9377f5d5f1e14826a93b303ef58efc92',
+            "X-Unfold-Goals": "true",
+        }
+        params = {
+            'dateFrom': bet_date["dateFrom"],
+            'dateTo': bet_date["dateTo"]
+        }
+        response = requests.get(url, headers=headers, params=params)
+        ref_data = response.json()
+        user_bets_info = [(item2["id"], item2["status"]) for item2 in item["slip"]]
+        ref_data_info = {match_item["id"]: match_item.get("status") for match_item in ref_data["matches"]}
+        matching_statuses = [(user_id, ref_data_info.get(user_id)) for user_id, _ in user_bets_info]
+        
+        all_finished = all(status == 'FINISHED' for _, status in matching_statuses)
+        print(all_finished)
+        # for user_id, status in matching_statuses:
+        #     print(f"Matching id: {user_id}, Status: {status}")
+
+check_validated_bets()  
+
+
+                 
+            # ________   ________   ________   ________   _________   _______    _______          
+            # |\   ____\ |\   __  \ |\   __  \ |\   __  \ |\___   ___\|\  ___ \  |\  ___ \         
+            # \ \  \___|_\ \  \|\  \\ \  \|\  \\ \  \|\  \\|___ \  \_|\ \   __/| \ \   __/|        
+            # \ \_____  \\ \   ____\\ \  \\\  \\ \   _  _\    \ \  \  \ \  \_|/__\ \  \_|/__      
+            # \|____|\  \\ \  \___| \ \  \\\  \\ \  \\  \|    \ \  \  \ \  \_|\ \\ \  \_|\ \     
+            #     ____\_\  \\ \__\     \ \_______\\ \__\\ _\     \ \__\  \ \_______\\ \_______\    
+            # |\_________\\|__|      \|_______| \|__|\|__|     \|__|   \|_______| \|_______|    
+            # \|_________|                                                                      
+                                                                                     
+                                                                                           
 
 if __name__ == '__main__':
     app.run(debug=True)

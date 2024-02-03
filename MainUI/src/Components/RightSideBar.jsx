@@ -4,8 +4,7 @@ import '../styles/right-side-bar.css';
 import BetSlip from './SubComponents/BetSlip';
 import BetHistory from './SubComponents/BetHistory';
 
-function RightSideBar({ data, setData, localStorageItems, addToSlip, setLocalStorageItems, registeredBets, setRegisteredBets}) {
-  const [slipCount, setSlipCount] = useState(0);
+function RightSideBar({ data, betDate, setData, localStorageItems, addToSlip, setLocalStorageItems, registeredBets, setRegisteredBets}) {
   const [betCount, setBetCount] = useState(0);
   const [isActive, setIsActive] = useState('bet-slip');
   
@@ -26,7 +25,7 @@ function RightSideBar({ data, setData, localStorageItems, addToSlip, setLocalSto
             className={isActive === 'bet-slip' ? 'active' : ''}
             onClick={ () => toggleActive('bet-slip')}  
           >
-            Bet Slip {slipCount}
+            Bet Slip {registeredBets.length}
           </Link>
 
           <Link 
@@ -42,6 +41,7 @@ function RightSideBar({ data, setData, localStorageItems, addToSlip, setLocalSto
           <Routes>
             <Route path="/" element={<BetSlip 
               data={data} 
+              betDate={betDate}
               setData={setData} 
               localStorageItems={localStorageItems} 
               setLocalStorageItems={setLocalStorageItems} 
@@ -52,12 +52,14 @@ function RightSideBar({ data, setData, localStorageItems, addToSlip, setLocalSto
 
             <Route path="/bet-slip" element={<BetSlip 
               data={data} 
+              betDate={betDate}
               setData={setData} 
               localStorageItems={localStorageItems} 
               setLocalStorageItems={setLocalStorageItems} 
               addToSlip={addToSlip}
               registeredBets={registeredBets}
               setRegisteredBets={setRegisteredBets}
+
             />} />
             <Route path="/bet-history" element={<BetHistory />} />
           </Routes>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import axios from 'axios';
 import Nav from './Components/Nav'
 import LeftSideBar from './Components/LeftSideBar'
 import ContentArea from './Components/ContentArea'
@@ -13,6 +14,7 @@ import { useLocalStorageSelections } from './Components/SubComponents/utils';
 
 function App() {
   const [data, setData] = useState([])
+  const [betDate, setBetDate] = useState([])
   const [resultCount, setResultCount] = useState(null)
   const storageKey = 'slipSelections';
   const { localStorageItems, setLocalStorageItems, betSlip, addToSlip } = useLocalStorageSelections(storageKey, data);
@@ -57,9 +59,33 @@ function App() {
   const processData  = (newData) => {
     const Matches = newData.matches
     const count = newData.resultSet.count 
+    const date = newData.filters
     setData(Matches)
+    setBetDate(date)
     setResultCount(count)
   } 
+
+  useEffect(() => {  
+    const fetchUserBets = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:5000/user/bets', {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        })
+
+        const userBetsList = response.data;
+        setRegisteredBets(userBetsList.user_bets);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+
+      }
+    }
+
+    fetchUserBets();
+  }, [data, accessToken])
+  
   
 
   return (
@@ -95,6 +121,7 @@ function App() {
                     />
                     <RightSideBar
                       data={data}
+                      betDate={betDate}
                       setData={setData}
                       localStorageItems={localStorageItems}
                       setLocalStorageItems={setLocalStorageItems}
