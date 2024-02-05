@@ -44,7 +44,7 @@ def get_api_data():
         'dateFrom': dateFrom,
         'dateTo': dateTo
     }
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, params=params)
     data = response.json()
     return jsonify(data)
 
@@ -136,7 +136,7 @@ def check_validated_bets():
     slipState = []
     for item in user_bets:
         bet_date = item['betDate']
-
+        state = "lost"
         url = "http://api.football-data.org/v4/matches"
         headers = {
             'X-Auth-Token': '9377f5d5f1e14826a93b303ef58efc92',
@@ -190,22 +190,26 @@ def check_validated_bets():
             if bet_win:
                 user_data = collection.find_one({'useremail': user_email})
                 balance = user_data.get('balance', 0)
-                # new_balance = balance + pWin(client state)
-                print(f"The balance for {user_email} is: {balance}")
+                p_win = item["pWin"]
+                new_balance = balance + p_win
 
+                collection.update_one(
+                    {'useremail': user_email},
+                    {'$set': {'balance': new_balance}}
+                )
+                state = "won"
+                print(f"The updated balance for {user_email} is: {balance}")
+
+            item["state"] = state
             bet_id_to_move = item['id']
             print(bet_id_to_move)
             result = collection.update_one(
                 {'useremail': user_email, 'bets.id': bet_id_to_move},
                 {
                     '$pull': {'bets': {'id': bet_id_to_move}},
-                    '$push': {'history': {'$each': [{'id': bet_id_to_move}], '$position': 0}}
+                    '$push': {'history': {'$each': [item], '$slice': 30}}
                 }
-            )
-
-            # Check if the update was successful
-            if result.modified_count > 0:
-                print(f"Bet with ID {bet_id_to_move} moved to history for user {user_email}.")    
+            )  
 
             
                 
