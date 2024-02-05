@@ -74,7 +74,7 @@ function BetSlip({ localStorageItems, data, betDate, setData, addToSlip, setLoca
   const sendDataToBackend = async () => {
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/odds', {
-        slip: slipObjects, totalOdds, stakeAmount, betDate
+        slip: slipObjects, totalOdds, stakeAmount, betDate, pWin
       }, {
         headers: {
           'Authorization': `Bearer ${accessToken}`,

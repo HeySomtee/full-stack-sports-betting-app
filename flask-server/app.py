@@ -148,14 +148,69 @@ def check_validated_bets():
         }
         response = requests.get(url, headers=headers, params=params)
         ref_data = response.json()
-        user_bets_info = [(item2["id"], item2["status"]) for item2 in item["slip"]]
-        ref_data_info = {match_item["id"]: match_item.get("status") for match_item in ref_data["matches"]}
-        matching_statuses = [(user_id, ref_data_info.get(user_id)) for user_id, _ in user_bets_info]
+
+        user_bets_info = [
+            (item2["id"], item2["status"]) for item2 in item["slip"]
+        ]
+
+        selected_winners = [
+            (
+                item2["id"],
+                (item2["className"][:item2["className"].find("Win")] + '_TEAM').upper()
+                if "Win" in item2["className"]
+                else item2["className"].upper()
+            )
+            for item2 in item["slip"]
+        ]
+
+
+        selected_winners_info = {
+            match_item: match_item2 for match_item, match_item2 in selected_winners
+        }
+
+        ref_data_info = {
+            match_item["id"]: match_item.get("status") for match_item in ref_data["matches"]
+        }
+
+        win_status_info = {
+            match_item["id"]: match_item["score"]["winner"] for match_item in ref_data["matches"]
+        }
         
-        all_finished = all(status == 'FINISHED' for _, status in matching_statuses)
-        print(all_finished)
-        # for user_id, status in matching_statuses:
-        #     print(f"Matching id: {user_id}, Status: {status}")
+
+        matching_statuses = [
+            (match_id, ref_data_info.get(match_id), win_status_info.get(match_id), selected_winners_info.get(match_id))
+            for match_id, _ in user_bets_info
+        ]
+        # print(matching_statuses)
+          
+        all_finished = all(status == 'FINISHED' for _, status, _, _ in matching_statuses)
+        if all_finished:
+            bet_win = all(winners == selected_winners for _, _, winners, selected_winners in matching_statuses)
+            print(bet_win)
+            if bet_win:
+                user_data = collection.find_one({'useremail': user_email})
+                balance = user_data.get('balance', 0)
+                # new_balance = balance + pWin(client state)
+                print(f"The balance for {user_email} is: {balance}")
+
+            bet_id_to_move = item['id']
+            print(bet_id_to_move)
+            result = collection.update_one(
+                {'useremail': user_email, 'bets.id': bet_id_to_move},
+                {
+                    '$pull': {'bets': {'id': bet_id_to_move}},
+                    '$push': {'history': {'$each': [{'id': bet_id_to_move}], '$position': 0}}
+                }
+            )
+
+            # Check if the update was successful
+            if result.modified_count > 0:
+                print(f"Bet with ID {bet_id_to_move} moved to history for user {user_email}.")    
+
+            
+                
+
+
 
 check_validated_bets()  
 
